@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Msg
-  describe ReceiptsController do
+  describe EnvelopesController do
   
   end
 end

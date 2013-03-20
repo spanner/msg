@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 # Specs in this file have access to a helper object that includes
-# the ReceiptsHelper. For example:
+# the EnvelopesHelper. For example:
 #
-# describe ReceiptsHelper do
+# describe EnvelopesHelper do
 #   describe "string concat" do
 #     it "concats two strings with spaces" do
 #       helper.concat_strings("this","that").should == "this that"
@@ -11,7 +11,7 @@ require 'spec_helper'
 #   end
 # end
 module Msg
-  describe ReceiptsHelper do
+  describe EnvelopesHelper do
     pending "add some examples to (or delete) #{__FILE__}"
   end
 end

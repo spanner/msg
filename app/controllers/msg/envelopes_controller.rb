@@ -1,6 +1,6 @@
 require_dependency "msg/application_controller"
 
 module Msg
-  class ReceiptsController < ApplicationController
+  class EnvelopesController < ApplicationController
   end
 end
