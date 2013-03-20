@@ -13,6 +13,8 @@ gem 'kaminari'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'delayed_mailhopper'
+gem 'mailman'
+gem 'roadie'
 
 group :assets do
   gem 'sass-rails'
@@ -25,7 +27,6 @@ end
 group :test, :development do
   gem 'mysql2'
   gem 'haml'
-  gem 'paperclip'
   gem 'launchy'
   gem 'capybara'
   gem 'rspec-rails'
