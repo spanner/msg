@@ -7,6 +7,10 @@ module Msg
     
     after_create :send_message
     
+    def open!
+      update_column(:opened_at, Time.now)
+    end
+    
   protected
   
     def send_message

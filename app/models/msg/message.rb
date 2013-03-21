@@ -11,9 +11,12 @@ module Msg
 
 
 
+    def render_for(receiver)
+      renderer.parse(self.body, receiver.for_email)
+    end
 
-    def preview_for(thing)
-      
+    def renderer
+      # Mustache?
     end
 
   end
