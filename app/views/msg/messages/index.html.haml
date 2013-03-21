@@ -1,0 +1,17 @@
+#main.messages
+
+  %h2.section
+    = t :transactional_messages
+  = render :partial => "msg/messages/messages", :collection => @transactional_messages
+    
+  %h2.section
+    = t :saved_messages
+  = render :partial => "msg/messages/messages", :collection => @saved_messages
+
+
+-content_for :margin do
+  = render :partial => "msg/bounces/report"
+  = render :partial => "msg/sendings/report"
+
+-content_for :title do
+  = t :messages

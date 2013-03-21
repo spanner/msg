@@ -1,0 +1,27 @@
+!!!
+%html{:lang => 'en'}
+  %head
+    %title
+      - if content_for?(:pagetitle)
+        = yield :pagetitle
+        \|
+      = t(:msg)
+
+    = stylesheet_link_tag "msg"
+    = javascript_include_tag "msg"
+    = content_for :head
+    = csrf_meta_tags
+
+  %body
+    #header
+      %p.warning
+        = t :please_set_layout
+    #page
+      #content
+        = yield
+
+    #flashes
+      %p.notice= notice
+      %p.alert= alert
+
+    #mask

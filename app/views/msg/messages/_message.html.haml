@@ -1,0 +1,9 @@
+- message ||= @message
+
+.message{:id => "message_#{message.id}", :data => {:refreshable => true, :url => message_path(message, :format => :js)} }
+  %h3.subject
+    = message.subject
+  %p.description
+    = message.description
+  %p.excerpt
+    = shorten(message.body, 128)

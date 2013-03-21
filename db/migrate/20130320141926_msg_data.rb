@@ -5,7 +5,7 @@ class MsgData < ActiveRecord::Migration
       t.text :body
       t.string :role
       t.text :description
-      t.boolean :required
+      t.boolean :transactional
       t.boolean :saved
       t.integer :created_by_id
       t.timestamps
@@ -14,8 +14,6 @@ class MsgData < ActiveRecord::Migration
     create_table :msg_sendings do |t|
       t.integer :message_id
       t.integer :created_by_id
-      t.boolean :approved
-      t.boolean :approved_by_id
       t.datetime :sent_at
       t.timestamps
     end

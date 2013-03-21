@@ -1,0 +1,5 @@
+#main.sent
+  = render :partial => "msg/sendings/sending", :collection => @sendings
+
+-content_for :title do
+  = t :sent_messages

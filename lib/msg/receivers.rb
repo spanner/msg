@@ -18,6 +18,8 @@ module Msg
         extend Msg::ReceiverClassMethods
         include Msg::ReceiverInstanceMethods
       }
+      
+      Msg.receiving_classes.push(self)
     end
   end
   

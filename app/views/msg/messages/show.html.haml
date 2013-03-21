@@ -1,0 +1,8 @@
+#main.message
+  = render :partial => "msg/messages/preview", :locals => {:message => @message}
+
+-content_for :margin do
+  = render :partial => "msg/sendings/report", :locals => {:message => @message}
+
+-content_for :title do
+  = t :messages

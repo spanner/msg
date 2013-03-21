@@ -1,0 +1,9 @@
+- sending ||= @sending
+
+.sending{:id => "sending_#{sending.id}", :data => {:refreshable => true, :url => sending_path(sending, :format => :js)} }
+  %h3.subject
+    = sending.message.subject
+  %p.description
+    = t(:sent_to, :count => sending.envelopes.count)
+    = t(:on)
+    = l(sending.sent_at, :format => :natural)
