@@ -1,6 +1,4 @@
-require_dependency "msg/application_controller"
-
 module Msg
-  class BouncesController < ApplicationController
+  class BouncesController < Msg::EngineController
   end
 end

@@ -2,11 +2,13 @@
 
   %h2.section
     = t :transactional_messages
-  = render :partial => "msg/messages/messages", :collection => @transactional_messages
+  = render "msg/messages/transactional_messages"
     
   %h2.section
     = t :saved_messages
-  = render :partial => "msg/messages/messages", :collection => @saved_messages
+    %span.action
+      = link_to t(:add_message), msg.new_message_url, :class => "add minimal", :data => {:action => "popup", :affected => "#saved_messages"}
+  = render "msg/messages/saved_messages"
 
 
 -content_for :margin do

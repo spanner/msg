@@ -1,6 +1,4 @@
-require_dependency "msg/application_controller"
-
 module Msg
-  class SendingsController < ApplicationController
+  class SendingsController < Msg::EngineController
   end
 end

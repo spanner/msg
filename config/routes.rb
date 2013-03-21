@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :messages
+  resources :messages do
+    collection do
+      get :transactional
+      get :saved
+    end
   resources :sendings
 
   # envelopes#show is pinged when a message is opened

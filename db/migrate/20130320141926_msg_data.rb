@@ -5,7 +5,7 @@ class MsgData < ActiveRecord::Migration
       t.text :body
       t.string :role
       t.text :description
-      t.boolean :transactional
+      t.boolean :transactional, :default => false
       t.boolean :saved
       t.integer :created_by_id
       t.timestamps

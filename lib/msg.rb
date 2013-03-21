@@ -4,7 +4,8 @@ require "msg/engine"
 module Msg
   mattr_accessor :user_class,
                  :layout,
-                 :email_layout, 
+                 :email_layout,
+                 :email_from,
                  :group_scopes,
                  :receiving_classes
   
@@ -23,6 +24,10 @@ module Msg
 
     def email_layout
       @@email_layout ||= "msg/email"
+    end
+
+    def email_from
+      @@email_from ||= "set_email_from_in_msg_initializer@example.com"
     end
 
     def group_scopes

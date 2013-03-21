@@ -1,0 +1,3 @@
+#transactional_messages.message_list{:data => {:refreshable => true, :url => transactional_messages_path(:format => :js)}}
+  = render :partial => "msg/messages/message", :collection => @transactional_messages
+
