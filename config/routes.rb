@@ -1,10 +1,13 @@
-Rails.application.routes.draw do
+Msg::Engine.routes.draw do
 
   resources :messages do
+    resources :sendings, :only => [:new, :create]
     collection do
       get :transactional
       get :saved
     end
+  end
+  
   resources :sendings
 
   # envelopes#show is pinged when a message is opened

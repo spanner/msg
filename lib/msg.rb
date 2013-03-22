@@ -8,6 +8,7 @@ module Msg
                  :email_from,
                  :email_return_path,
                  :email_bcc,
+                 :email_values,
                  :group_scopes,
                  :receiving_classes
   
@@ -21,7 +22,7 @@ module Msg
     end
 
     def layout
-      @@email_layout ||= "msg/default"
+      @@layout ||= "msg/default"
     end
 
     def email_layout
@@ -30,6 +31,10 @@ module Msg
 
     def email_from
       @@email_from ||= "please_configure_email_in_msg_initializer@example.com"
+    end
+    
+    def email_values
+      @@email_values ||= {}
     end
 
     def group_scopes

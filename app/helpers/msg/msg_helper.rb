@@ -1,6 +1,5 @@
 module Msg
   module MsgHelper
-
     def shorten(text, length=64)
       length = length[:length] if length.is_a?(Hash)
       truncate(strip_tags(text), {:length => length, :separator => " "})

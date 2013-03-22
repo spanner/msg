@@ -1,6 +1,6 @@
 module Msg
   class EngineController < ::ApplicationController
-    helper Msg::MsgHelper
+    
     before_filter :authenticate_user!
     before_filter :require_admin!
     layout :no_layout_if_pjax

@@ -4,6 +4,9 @@ en:
       msg:
     errors:
       msg:
+  msg: "Messaging"
+  bounce_report: "Bounces"
+  sent_report: "Sent box"
   messages: "Messages"
   please_set_layout: "You probably want to set Msg.layout (in an initializer) so that msg uses your application layout and not this default file."
   confirm_delete_message: "Are you sure you want to delete the message '%{subject}? This cannot be undone."
@@ -13,12 +16,6 @@ en:
   transactional_messages: "Administrative messages"
   saved_messages: "Saved messages"
   sent_messages: "Sent box"
-  time:
-    formats:
-      natural: "%l:%M%P"
-      natural_with_date: "%l:%M%P, %d %B %Y"
-      precise: "%H:%M:%S"
-      month_and_year: "%b %Y"
   date:
     formats:
       dashed_short_date_format: "%d-%m-%Y"
@@ -29,3 +26,9 @@ en:
       minimal_with_year: "%d %b %Y"
       year: "%Y"
       month: "%B %Y"
+  time:
+    formats:
+      natural: "%l:%M%P"
+      natural_with_date: "%l:%M%P, %d %B %Y"
+      precise: "%H:%M:%S"
+      month_and_year: "%b %Y"

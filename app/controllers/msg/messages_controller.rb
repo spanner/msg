@@ -23,6 +23,10 @@ module Msg
       respond_with @message
     end
     
+    def preview
+      respond_with @message
+    end
+    
     def new
       respond_with @message
     end
@@ -57,7 +61,7 @@ module Msg
     end
 
     def get_transactional_messages
-      @transactional_messages = Msg::Message.transactional.
+      @transactional_messages = Msg::Message.transactional
     end
     
     def get_saved_messages
@@ -65,5 +69,6 @@ module Msg
       @page = params[:page] || 1
       @saved_messages = Msg::Message.saved.page(@page).per(@show)
     end
+
   end
 end

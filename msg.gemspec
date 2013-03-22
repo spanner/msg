@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["William Ross"]
   s.email       = ["will@spanner.org"]
   s.homepage    = "https://github.com/spanner/msg"
-  s.summary     = "Makes your transactional and promotional email more flavoursome."
-  s.description = "MSG is a general-purpose messaging engine for rails 3 apps. Use it to compose, revise, send and resend messages to selected or generated groups of user-like objects."
+  s.summary     = "Makes your email more flavoursome."
+  s.description = "Msg is a general-purpose messaging engine for rails 3 apps. Use it to compose, revise, send and resend messages to selected or generated groups of user-like objects. It uses a simple mustache-based template system and brings your devise email templates into the database so that they too are editable and resendable."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
 
   # Sending mail
   s.add_dependency 'roadie'
+  s.add_dependency 'mustache'
   s.add_dependency 'daemons'
   s.add_dependency 'delayed_job_active_record'
   s.add_dependency 'delayed_mailhopper'
@@ -34,7 +35,6 @@ Gem::Specification.new do |s|
   # Testing
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency 'cucumber-rails'

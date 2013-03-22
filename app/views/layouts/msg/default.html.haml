@@ -16,10 +16,13 @@
     #header
       %p.warning
         = t :please_set_layout
+
     #page
       #content
         = yield
-
+      #margin
+        = content_for :margin
+        
     #flashes
       %p.notice= notice
       %p.alert= alert

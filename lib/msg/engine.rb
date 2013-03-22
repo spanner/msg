@@ -10,5 +10,12 @@ module Msg
     initializer "msg.integration" do
       ActiveRecord::Base.send :include, Msg::Receivers
     end
+    
+    initializer 'msg.action_controller' do |app|
+      ActiveSupport.on_load :action_controller do
+        helper Msg::MsgHelper
+      end
+    end
+    
   end
 end

@@ -3,10 +3,10 @@ class MsgData < ActiveRecord::Migration
     create_table :msg_messages do |t|
       t.string :subject
       t.text :body
-      t.string :role
+      t.string :function
       t.text :description
       t.boolean :transactional, :default => false
-      t.boolean :saved
+      t.boolean :saved, :default => false
       t.integer :created_by_id
       t.timestamps
     end
