@@ -1,0 +1,7 @@
+#edit_message
+  .header
+    = link_to "X", '#', :class => "closer", :data => {:action => "close"}
+    %h2
+      = t :edit_message
+
+  = render :partial => 'form'
