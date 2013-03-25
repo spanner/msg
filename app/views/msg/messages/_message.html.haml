@@ -1,8 +1,8 @@
 - message ||= @message
 
-.message{:id => "message_#{message.id}", :class => "message", :data => {:refreshable => true, :url => message_path(message, :format => :js)} }
+.message{:id => "message_#{message.id}", :data => {:refreshable => true, :url => message_path(message, :format => :js)} }
   %h2.name
-    = link_to shorten(message.subject, 40), msg.message_url(message)
+    = link_to shorten(message.subject, 54), msg.message_url(message), :class => "message"
     = action_menulink(message)
   = action_menu(message)
   %p.description

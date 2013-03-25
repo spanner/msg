@@ -1,0 +1,20 @@
+= form_for @message, :html => {:class => 'edit message', :remote => true, :data => {:type => :html}} do |f|
+  %p.subject
+    = f.text_field :subject, :class => 'name', :placeholder => t(:message_subject)
+
+  %p.description
+    = f.text_field :description, :class => "description", :placeholder => t(:message_description)
+
+  .messagebody.wysihtml
+    .toolbar#t1
+      = render 'msg/shared/toolbar'
+    = f.text_area :body, :id => 'd1', :class => "body"
+
+  - if admin?
+    %p.function
+      = f.text_field :function, :class => "function", :placeholder => t(:message_function)
+
+  .buttons
+    = f.submit t(:save_message)
+    = t :or
+    = link_to t(:cancel), "/", :class => 'cancel'

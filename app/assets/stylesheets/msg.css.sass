@@ -1,14 +1,57 @@
-.message
-  margin-top: 5px
-  margin-bottom: 20px
-  h2.name
-    margin-left: -32px
-    a.message
-      +big_icon_link("msg/message.png")
-      color: $text
-      +hover
-  p.description
-    margin: 0
+.message_list
+  div.message
+    margin-top: 5px
+    margin-bottom: 20px
+    h2.name
+      margin-left: -32px
+      a.message
+        +big_icon_link("msg/message.png")
+        color: $text
+        +hover
+    p.description
+      margin: 0
+      color: $mid
+    p.excerpt
+      margin: 0
+
+#edit_message
+  width: 800px
+  .header
+    width: 790px
+  div.instructions
+    position: absolute
+    width: 220px
+    right: 20px
+    top: 184px
     color: $mid
-  p.excerpt
-    margin: 0
+    font-size: 90%
+    ul
+      list-style: none
+      padding: 0
+  form.message
+    width: 540px
+    p.subject, p.description
+      margin: 3px 0
+      input[type="text"]
+        width: 760px
+    a.datepicker
+      color: $input
+    textarea.body
+      width: 530px
+      height: 400px
+      font-size: 1.2em
+    input.name
+      font-size: 2.5em
+      font-weight: bold
+    input.description
+      font-size: 1.2em
+    textarea.body
+      font-size: 1.2em
+    p.function
+      float: right
+      width: 280px
+      margin: 3px 0
+      input[type="text"]
+        font-size: 1em
+        width: 270px
+      
