@@ -3,7 +3,7 @@ module Msg
     attr_accessible :message_id, :envelopes_attributes
 
     belongs_to :message
-    belongs_to :created_by, :foreign_class => Msg.user_class
+    belongs_to :created_by, :class_name => Msg.user_class
 
     has_many :envelopes, :dependent => :destroy
     accepts_nested_attributes_for :envelopes

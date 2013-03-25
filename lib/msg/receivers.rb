@@ -1,7 +1,7 @@
 module Msg
   module Receivers
     def self.included(base)
-      base.send :include, MsgClassMethods
+      base.extend MsgClassMethods
     end
   end
   

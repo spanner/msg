@@ -13,7 +13,7 @@ module Msg
     
     def headers_for(record, action, opts)
       headers = super(action, opts)
-      headers[:body] = body_for(record, action))
+      headers[:body] = body_for(record, action)
       headers
     end
     

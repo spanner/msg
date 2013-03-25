@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Msg
-  describe MsgDeviseMailer do
+  describe DeviseMailer do
 
     context "sending a transactional message" do
       before do
