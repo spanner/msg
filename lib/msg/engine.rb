@@ -5,6 +5,8 @@ module Msg
     config.generators do |g|
       g.test_framework :rspec, :view_specs => false
       g.fixture_replacement :factory_girl
+      g.assets false
+      g.helper false
     end
     
     initializer "msg.integration" do

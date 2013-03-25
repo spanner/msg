@@ -8,8 +8,7 @@ module Msg
     #
     def show
       @envelope.mark_as_read(Time.now)
-      # return a png dot
-      head :ok
+      redirect_to view_context.image_path('msg/ping.png')
     end
   
   protected

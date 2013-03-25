@@ -21,6 +21,10 @@ module Msg
   class EmailInvalid < MsgError; end
   
   class << self
+    
+    def setup
+      yield self
+    end
 
     def layout
       @@user_class ||= "User"

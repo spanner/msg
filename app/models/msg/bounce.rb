@@ -1,25 +1,19 @@
 module Msg
   class Bounce < ActiveRecord::Base
-    attr_accessible :envelope_id, :status, :error, :raw_message,
-    belongs_to :receiver
-    before_save :read_headers
-    validates :raw_message, :presence => true
+    attr_accessible :envelope, :bounce_type, :bounce_subtype, :raw_message, :reporter
+    belongs_to :envelope
+    validates :envelope, :presence => true
     
-    # theoretically:
-    #
-    # def self.from(email)
-    #   if email.bounced?
-    #     envelope = Msg::Envelope.find_by_message_id(email.original_message_id)
-    #     self.create({
-    #       :raw_message => email.to_s,
-    #       :body => email.body.decoded,
-    #       :subject => email.subject,
-    #       :error => email.error_status,
-    #       :problem => email.diagnostic_code,
-    #       :email => email.final_recipient,
-    #       :envelope => envelope,
-    #     })
-    # end
+    scope :fatal, where(:bounce_type => "Permanent")
+    scope :transient, where(:bounce_type => "Transient")
+    
+    def fatal?
+      bounce_type == 'Permanent'
+    end
+
+    def transient?
+      bounce_type == 'Transient'
+    end
     
   end
 end

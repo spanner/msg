@@ -4,7 +4,7 @@ module Msg
   class BouncesController < Msg::EngineController
     respond_to :json
     
-    # this is pinged from Amazon SNS with a JSON bounce package, if I've got it vaguely right:
+    # this is pinged from Amazon SNS with a JSON body something like this:
     #
     # {
     #     "notificationType":"Bounce",
@@ -32,7 +32,10 @@ module Msg
     #        ]
     #     }
     #  }
-    # 
+    #
+    #
+    # When the subscription is first set up they will also POST us a SubscriptionConfirmation,
+    # upon which we have to GET the given url to confirm that we can follow orders.
     #
     def create
       if request.headers['x-amz-sns-message-type'] == 'SubscriptionConfirmation'

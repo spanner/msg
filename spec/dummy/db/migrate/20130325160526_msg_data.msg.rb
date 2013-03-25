@@ -1,3 +1,4 @@
+# This migration comes from msg (originally 20130320141926)
 class MsgData < ActiveRecord::Migration
   def change
     create_table :msg_messages do |t|
