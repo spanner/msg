@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'aws-ses'
   
   # Receiving mail
-  s.add_dependency 'mailman'
+  s.add_dependency 'httpclient'
 
   # Testing
   s.add_development_dependency "sqlite3"

@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module Msg
   class BouncesController < Msg::EngineController
     respond_to :json
@@ -33,8 +35,23 @@ module Msg
     # 
     #
     def create
-      @bounce.update_attributes(params[:bounce])
-      respond_with @bounce
+      if request.headers['x-amz-sns-message-type'] == 'SubscriptionConfirmation'
+        response = HTTParty.get(params['SubscribeURL'])
+        head :ok
+
+      else
+        mail = params['Message']['mail']
+        bounce = params['Message']['bounce']
+        if envelope = Msg::Envelope.find_by_email_id(mail['message-id'])
+          envelope.bounces.create({
+            :type => bounce['bounceType'],
+            :subtype => bounce['bounceSubType'],
+            :reporter => bounce['reportingMTA'],
+            :raw_message => bounce.dump
+          })
+        end
+        head :ok
+      end
     end
     
   protected

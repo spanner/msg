@@ -42,12 +42,13 @@ class MsgData < ActiveRecord::Migration
     
     create_table :msg_bounces do |t|
       t.integer :envelope_id
-      t.string :status
-      t.string :error
+      t.string :type
+      t.string :subtype
+      t.string :reporter
       t.text :raw_message
       t.timestamps
     end
-    add_index :msg_sendings, :envelope_id
+    add_index :msg_bounces, :envelope_id
     
   end
 end
