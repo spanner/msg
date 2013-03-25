@@ -9,9 +9,6 @@ gem "jquery-rails"
 gem 'dynamic_form'
 gem 'kaminari'
 gem 'daemons'
-gem 'delayed_job_active_record'
-gem 'delayed_mailhopper'
-gem 'mailman'
 gem 'roadie'
 
 group :assets do

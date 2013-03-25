@@ -2,6 +2,8 @@ require 'spec_helper'
 
 module Msg
   describe Sending do
-    pending "add some examples to (or delete) #{__FILE__}"
+
+    # perhaps some basic structural tests should go here, but the sending is really just a glue class
+
   end
 end

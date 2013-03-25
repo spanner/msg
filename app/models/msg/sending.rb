@@ -4,7 +4,9 @@ module Msg
 
     belongs_to :message
     belongs_to :created_by, :foreign_class => Msg.user_class
-    has_many :envelopes
+
+    has_many :envelopes, :dependent => :destroy
     accepts_nested_attributes_for :envelopes
+    
   end
 end

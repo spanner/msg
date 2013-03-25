@@ -2,6 +2,11 @@ require 'spec_helper'
 
 module Msg
   describe Bounce do
-    pending "add some examples to (or delete) #{__FILE__}"
+
+    # bounces are motley, unpredictable things that look different every time.
+    # 
+    it "should require a body"
+    it "should not require an envelope"
+
   end
 end

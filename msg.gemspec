@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Makes your email more flavoursome."
   s.description = "Msg is a general-purpose messaging engine for rails 3 apps. Use it to compose, revise, send and resend messages to selected or generated groups of user-like objects. It uses a simple mustache-based template system and brings your devise email templates into the database so that they too are editable and resendable."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.13"
@@ -25,9 +25,7 @@ Gem::Specification.new do |s|
   # Sending mail
   s.add_dependency 'roadie'
   s.add_dependency 'mustache'
-  s.add_dependency 'daemons'
-  s.add_dependency 'delayed_job_active_record'
-  s.add_dependency 'delayed_mailhopper'
+  s.add_dependency 'aws-ses'
   
   # Receiving mail
   s.add_dependency 'mailman'

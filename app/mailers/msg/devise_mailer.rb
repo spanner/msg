@@ -1,6 +1,6 @@
 module Msg
   class DeviseMailer < ActionMailer::Base
-    default from: Msg.email_from, :return_path => Msg.email_return_path, :bcc => Msg.email_bcc
+    default from: Msg.default_from_address, :bcc => Msg.email_bcc
     layout Msg.email_layout
 
     # It would be nice to intervene less in Devise but we can't send user-authored content straight
