@@ -1,11 +1,18 @@
 require 'spec_helper'
 
 module Msg
-  describe Bounce do
+  describe Msg::Bounce do
 
     # we get our bounce notifications from SNS so they have a very consistent structure
 
-    it "should require an envelope"
+    before :each do
+      @envelope = FactoryGirl.create(:envelope)
+      @bounce = FactoryGirl.create(:bounce, :envelope => @envelope)
+    end
+
+    it "should require an envelope" do
+      pp @envelope
+    end
 
   end
 end

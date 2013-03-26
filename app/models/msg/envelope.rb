@@ -6,25 +6,25 @@ module Msg
     belongs_to :sending
     belongs_to :receiver, :polymorphic => true
     has_many :bounces
-    
+
     validates :receiver, :presence => true
     validates :sending, :presence => true
     after_create :send_email
-    
+
     def message
       sending.message
     end
-    
+
     def open!
       update_column(:opened_at, Time.now)
     end
-    
+
     def url_to_open
       Rails.application.routes.url_helpers.envelope_url(self, :host => ActionMailer::Base.default_url_options[:host], :format => :png)
     end
 
   protected
-  
+
     def render_message
       values = receiver.for_email.reverse_merge(Msg.email_values)
       values[:tracker_dot] = url_to_open
@@ -32,7 +32,7 @@ module Msg
       rendered = Mustache.render(message.body, values)
       ActionController::Base.helpers.sanitize(rendered, :tags => Msg.tags_allowed_in_email, :attributes => Msg.attributes_allowed_in_email)
     end
-    
+
     def send_email
       self.email_id = "#{self.id}@#{Msg.sending_domain}"
       self.subject = message.subject

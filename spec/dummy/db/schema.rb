@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325160526) do
+ActiveRecord::Schema.define(:version => 20130326093048) do
 
   create_table "msg_bounces", :force => true do |t|
     t.integer  "envelope_id"

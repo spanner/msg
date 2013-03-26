@@ -7,6 +7,6 @@ module Msg
 
     has_many :envelopes, :dependent => :destroy
     accepts_nested_attributes_for :envelopes
-    
+
   end
 end
