@@ -36,7 +36,7 @@ module Msg
     def send_email
       self.email_id = "#{self.id}@#{Msg.sending_domain}"
       self.subject = message.subject
-      self.from_address = message.from_address
+      self.from_address = message.from
       self.to_address = receiver.email
       self.contents = render_message
       Msg::MsgMailer.message_in_envelope(self).deliver
