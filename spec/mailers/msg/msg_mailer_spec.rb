@@ -11,7 +11,6 @@ module Msg
       end
 
       it "should have the right to: address" do
-        ap @email.inspect
         pending
       end
       it "should have the right from: address"

@@ -7,7 +7,7 @@ module Msg
     # envelopes#show is pinged when a message is opened.
     #
     def show
-      @envelope.mark_as_read(Time.now)
+      @envelope.open!
       redirect_to view_context.image_path('msg/ping.png')
     end
   

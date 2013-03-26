@@ -57,6 +57,12 @@ Spork.prefork do
 
   end
 
+  ## controller methods
+  # devise sign_in
+  def sign_in_admin
+    sign_in FactoryGirl.create(:admin)
+  end
+
 end
 
 Spork.each_run do

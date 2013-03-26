@@ -7,7 +7,7 @@ Msg::Engine.routes.draw do
       get :saved
     end
   end
-  
+
   resources :sendings
 
   # envelopes#show is pinged when a message is opened

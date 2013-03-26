@@ -31,17 +31,17 @@ module Msg
   protected
 
     def build_sending
-      @sending = Msg::sending.new(params[:sending])
+      @sending = Msg::Sending.new(params[:sending])
     end
 
     def get_sending
-      @sending = Msg::sending.find(params[:id])
+      @sending = Msg::Sending.find(params[:id])
     end
 
     def get_sendings
       @show = params[:show] || 10
       @page = params[:page] || 1
-      @sendings = Msg::sending.page(@page).per(@show)
+      @sendings = Msg::Sending.page(@page).per(@show)
     end
   end
 end
