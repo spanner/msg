@@ -33,7 +33,11 @@ module Msg
     
     def create
       @message.update_attributes(params[:message])
-      respond_with @message
+      if @message.save
+        render :partial => "message"
+      else
+        respond_with @message
+      end
     end
     
     def edit
@@ -42,7 +46,11 @@ module Msg
     
     def update
       @message.update_attributes(params[:message])
-      respond_with @message
+      if @message.save
+        render :partial => "message"
+      else
+        respond_with @message
+      end
     end
     
     def destroy
