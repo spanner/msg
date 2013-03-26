@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :envelope, :class => 'Msg::Envelope' do
-    factroy :valid_envelope do
+    factory :valid_envelope do
       association :receiver, factory: :user
       sending
     end

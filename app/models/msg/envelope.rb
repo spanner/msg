@@ -29,7 +29,7 @@ module Msg
       values = receiver.for_email.reverse_merge(Msg.email_values)
       values[:tracker_dot] = url_to_open
       template = message.body + %{<img src="{{tracker_dot}}" />}
-      rendered = Mustache.render(message.body, values)
+      rendered = Mustache.render(template, values)
       ActionController::Base.helpers.sanitize(rendered, :tags => Msg.tags_allowed_in_email, :attributes => Msg.attributes_allowed_in_email)
     end
 

@@ -5,8 +5,7 @@ module Msg
 
     context "sending a transactional message" do
       before do
-        @user = 
-        @email = Msg::MsgDeviseMailer.message_in_envelope(envelope).deliver
+        
       end
 
       it "should have the right to: address"

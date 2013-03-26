@@ -16,12 +16,12 @@ module Msg
                  :sending_domain,
                  :ses_access_key_id,
                  :ses_secret_access_key
-  
+
   class MsgError < StandardError; end
   class EmailInvalid < MsgError; end
-  
+
   class << self
-    
+
     def setup
       yield self
     end
@@ -45,7 +45,7 @@ module Msg
     def default_from_name
       @@default_from_name ||= "Someone Unknown"
     end
-    
+
     def default_from
       "#{default_from_name} <#{default_from_address}>"
     end
@@ -57,7 +57,7 @@ module Msg
     def group_scopes
       @@group_scopes ||= []
     end
-    
+
     def add_group_scope(scope)
       group_scopes.push(scope)
     end
@@ -65,15 +65,15 @@ module Msg
     def receiving_classes
       @@receiving_classes ||= []
     end
-    
+
     def tags_allowed_in_email
       @@permitted_tags ||= ActionView::Base.sanitized_allowed_tags
     end
-    
+
     def attributes_allowed_in_email
       @@permitted_attributes ||= ActionView::Base.sanitized_allowed_attributes
     end
-    
+
     def sending_domain
       @@sending_domain ||= ActionMailer::Base.default_url_options[:host]
     end

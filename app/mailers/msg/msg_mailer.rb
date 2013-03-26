@@ -16,6 +16,6 @@ module Msg
         :body => envelope.contents
       })
     end
-    
+
   end
 end

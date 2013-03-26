@@ -3,7 +3,7 @@ require 'open-uri'
 module Msg
   class BouncesController < Msg::EngineController
     respond_to :json
-    
+
     # this is pinged from Amazon SNS with a JSON body something like this:
     #
     # {
@@ -56,12 +56,12 @@ module Msg
         head :ok
       end
     end
-    
+
   protected
-  
+
     def build_bounce
       @bounce = Msg::Bounce.new(params[:bounce])
     end
-  
+
   end
 end

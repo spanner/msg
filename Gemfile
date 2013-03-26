@@ -27,5 +27,6 @@ group :development, :test do
   gem 'spork'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'awesome_print'
 end
 

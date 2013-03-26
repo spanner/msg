@@ -6,7 +6,7 @@ module Msg
     # we get our bounce notifications from SNS so they have a very consistent structure
 
     before :each do
-      @bounce = FactoryGirl.create(:bounce)
+      @bounce = FactoryGirl.create(:valid_bounce)
     end
 
     it "should require an envelope" do
