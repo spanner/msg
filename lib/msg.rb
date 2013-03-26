@@ -46,6 +46,10 @@ module Msg
       @@default_from_name ||= "Someone Unknown"
     end
     
+    def default_from
+      "#{default_from_name} <#{default_from_address}>"
+    end
+
     def email_values
       @@email_values ||= {}
     end

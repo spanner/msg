@@ -5,32 +5,3 @@
       = t :edit_message
 
   = render :partial => 'form'
-
-  .instructions
-    %p
-      Use double braces to insert these computed values into each message:
-    %ul
-      %li
-        %strong
-          {{formal_name}}
-        the recipient's full name and title
-      %li
-        %strong
-          {{informal_name}}
-        forename, if we know it, or full name without title
-      %li
-        %strong
-          {{email}}
-        the receiving email address
-      %li
-        %strong
-          {{sign_in_url}}
-        the address of the login page
-      %li
-        %strong
-          {{confirmation_url}}
-        a confirmation address for use in invitations
-      %li
-        %strong
-          {{password_reset_url}}
-        a reset address for use in reminder messages

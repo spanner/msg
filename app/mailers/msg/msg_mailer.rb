@@ -1,6 +1,6 @@
 module Msg
   class MsgMailer < ActionMailer::Base
-    default from: Msg.default_from_address, :bcc => Msg.email_bcc
+    default from: Msg.default_from, :bcc => Msg.email_bcc
     layout Msg.email_layout
 
     # we send all messages through SES and use SNS to notify of bounces, so all the 

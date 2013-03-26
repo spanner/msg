@@ -16,6 +16,9 @@ en:
   message_description: "Description (for administration)"
   message_subject: "Subject"
   message_function: "Function"
+  message_from_address: "Sender email address"
+  message_from_name: "Sender name"
+  message_from_note: "Leave both address fields blank to use the default"
   save_message: "Save message"
   send_message: "send message"
   preview_message: "preview message"
@@ -23,6 +26,7 @@ en:
   transactional_messages: "Administrative messages"
   saved_messages: "Saved messages"
   sent_messages: "Sent box"
+  more_details: "Admin details"
   date:
     formats:
       dashed_short_date_format: "%d-%m-%Y"

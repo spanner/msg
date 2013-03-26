@@ -6,7 +6,8 @@ module Msg
     context "sending a message in an envelope" do
       before do
         @envelope = FactoryGirl.create(:msg_envelope)
-        @email = Msg::MsgMailer.message_in_envelope(envelope).deliver
+        @email = Msg::MsgMailer.message_in_envelope(envelope)
+        @email.deliver
       end
 
       it "should have the right to: address"
