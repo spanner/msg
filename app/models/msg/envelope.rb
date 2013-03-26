@@ -1,4 +1,3 @@
-require 'mustache'
 
 module Msg
   class Envelope < ActiveRecord::Base
@@ -20,17 +19,13 @@ module Msg
     end
     
     def url_to_open
-      Rails.application.routes.url_helpers.envelope_url(self, :host => ActionMailer::Base.default_url_options[:host], :format => :png)
+      Msg::Engine.routes.url_helpers.envelope_url(self, :host => ActionMailer::Base.default_url_options[:host], :format => :png)
     end
 
   protected
   
-    def render_message
-      values = receiver.for_email.reverse_merge(Msg.email_values)
-      values[:tracker_dot] = url_to_open
-      template = message.body + %{<img src="{{tracker_dot}}" />}
-      rendered = Mustache.render(message.body, values)
-      ActionController::Base.helpers.sanitize(rendered, :tags => Msg.tags_allowed_in_email, :attributes => Msg.attributes_allowed_in_email)
+    def render_with_tracker
+      message.render_for(receiver) + %{<img src="#{url_to_open}" />}
     end
     
     def send_email
@@ -38,7 +33,7 @@ module Msg
       self.subject = message.subject
       self.from_address = message.from
       self.to_address = receiver.email
-      self.contents = render_message
+      self.contents = render_with_tracker
       Msg::MsgMailer.message_in_envelope(self).deliver
       self.sent_at = Time.now
       self.save

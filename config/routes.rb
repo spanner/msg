@@ -2,6 +2,9 @@ Msg::Engine.routes.draw do
 
   resources :messages do
     resources :sendings, :only => [:new, :create]
+    member do
+      get :preview
+    end
     collection do
       get :transactional
       get :saved

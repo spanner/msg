@@ -1,5 +1,27 @@
-#main.message
-  = render :partial => "msg/messages/preview", :locals => {:message => @message}
+#preview_message
+  .header
+    = link_to "X", '#', :class => "closer", :data => {:action => "close"}
+    %h2
+      = t :preview_message
+  .headers
+    = link_to t(:send_this_message), msg.new_message_sending_url(@message), :class => "submit"
+    %p
+      %span.field
+        = t(:subject).titlecase + ":"
+      %strong
+        = @message.subject
+    %p
+      %span.field
+        = t(:to).titlecase + ":"
+      %strong
+        = @receiver.email
+    %p
+      %span.field
+        = t(:from).titlecase + ":"
+      %strong
+        = @message.from
+  %iframe.body{:src => msg.preview_message_url(@message, :receiver_type => @receiver.class.to_s.downcase.underscore.to_s, :receiver_id => @receiver.id)}
+
 
 -content_for :margin do
   = render :partial => "msg/sendings/report", :locals => {:message => @message}

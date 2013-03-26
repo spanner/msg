@@ -9,7 +9,7 @@ module Msg
                  :default_from_name,
                  :email_bcc,
                  :email_values,
-                 :group_scopes,
+                 :messaging_groups,
                  :receiving_classes,
                  :sanitized_allowed_tags,
                  :sanitized_allowed_attributes,
@@ -54,8 +54,8 @@ module Msg
       @@email_values ||= {}
     end
 
-    def group_scopes
-      @@group_scopes ||= []
+    def messaging_groups
+      @@group_scopes ||= {}
     end
     
     def add_group_scope(scope)
@@ -76,6 +76,16 @@ module Msg
     
     def sending_domain
       @@sending_domain ||= ActionMailer::Base.default_url_options[:host]
+    end
+
+
+
+
+
+    def add_receiving_class(klass, options)
+      klass = klass.to_s
+      receiving_classes << klass unless receiving_classes.include?(klass)
+      messaging_groups[klass.underscore] = options[:groups] || []
     end
 
   end

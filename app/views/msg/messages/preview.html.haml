@@ -1,1 +1,3 @@
-= @message.render_for(@receiver)
+- message ||= @message
+- receiver ||= @receiver
+= message.render_for(receiver)

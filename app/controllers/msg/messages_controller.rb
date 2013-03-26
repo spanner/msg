@@ -2,10 +2,11 @@ module Msg
   class MessagesController < Msg::EngineController
     respond_to :html, :js
 
-    before_filter :get_message, :only => [:show, :edit, :update, :destroy]
+    before_filter :get_message, :only => [:show, :edit, :update, :destroy, :preview]
     before_filter :build_message, :only => [:new, :create]
     before_filter :get_transactional_messages, :only => [:index, :transactional]
     before_filter :get_saved_messages, :only => [:index, :saved]
+    before_filter :get_receiver, :only => [:show, :preview]
     
     def index
       respond_with @saved_messages, @transactional_messages
@@ -24,7 +25,7 @@ module Msg
     end
     
     def preview
-      respond_with @message
+      respond_with @message, :layout => Msg.email_layout
     end
     
     def new
@@ -76,6 +77,18 @@ module Msg
       @show = params[:show] || 10
       @page = params[:page] || 1
       @saved_messages = Msg::Message.saved.page(@page).per(@show)
+    end
+    
+    def get_receiver
+      klass = params[:receiver_type] || Msg.receiving_classes.first
+      Rails.logger.warn ">>> receiver class #{klass}"
+      if id = params[:receiver_id]
+        @receiver = klass.classify.constantize.find(id)
+      else
+        @receiver = klass.classify.constantize.first
+      end
+      Rails.logger.warn ">>> receiver #{@receiver}"
+      raise ActiveRecord::RecordNotFound, "Cannot find a valid receiver for whom to preview message." unless @receiver
     end
 
   end

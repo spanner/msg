@@ -4,9 +4,9 @@
       %li
         = link_to t(:edit_message), msg.edit_message_url(message), :class => 'edit', :data => {:action => "popup", :replaced => "#message_#{message.id}"}
       %li
-        = link_to (t(:preview_message) + " &raquo;").html_safe, msg.message_url(message), :class => "edit"
+        = link_to t(:preview_message), msg.message_url(message), :class => "edit", :data => {:action => "popup"}
       %li
-        = link_to (t(:send_message) + " &raquo;").html_safe, msg.new_message_sending_url(message), :class => "send"
+        = link_to t(:send_message), msg.new_message_sending_url(message), :class => "send", :data => {:action => "popup", :affected => "#sentbox"}
       - unless message.transactional?
         %li
           = link_to t(:delete_message), msg.message_url(message), :method => 'delete', :class => 'delete', :data => {:action => "remove", :removed => "#message_#{message.id}", :confirm => t(:confirm_delete_message, :subject => message.subject)}
