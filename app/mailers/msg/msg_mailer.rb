@@ -8,10 +8,11 @@ module Msg
     #
     def message_in_envelope(envelope)
       headers['Message-ID'] = envelope.email_id
+      receiver = envelope.receiver
       mail({
-        :to => %{"#{receiver.name}" <#{receiver.email}>}, 
-        :from => envelope.from_address, 
-        :subject => envelope.subject, 
+        :to => %{"#{receiver.name}" <#{receiver.email}>},
+        :from => envelope.from_address,
+        :subject => envelope.subject,
         :body => envelope.contents
       })
     end

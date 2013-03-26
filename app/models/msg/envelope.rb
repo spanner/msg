@@ -20,7 +20,7 @@ module Msg
     end
 
     def url_to_open
-      Rails.application.routes.url_helpers.envelope_url(self, :host => ActionMailer::Base.default_url_options[:host], :format => :png)
+      Msg::Engine.routes.url_helpers.envelope_url(self, :host => ActionMailer::Base.default_url_options[:host], :format => :png)
     end
 
   protected

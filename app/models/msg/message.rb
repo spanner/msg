@@ -12,7 +12,7 @@ module Msg
     def from
       name = from_name? ? from_name : Msg.default_from_name
       address = from_address? ? from_address : Msg.default_from_address
-      "#{from_name || Msg.default_email_from_name} <#{from_address || Msg.default_email_from_address}>"
+      "#{from_name || Msg.default_from_name} <#{from_address || Msg.default_from_address}>"
     end
 
   end
