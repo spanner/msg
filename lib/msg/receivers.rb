@@ -6,20 +6,19 @@ module Msg
   end
   
   module MsgClassMethods
+
     def receives_messages?
       false
     end
 
-    def receives_messages
+    def receives_messages(options)
       return if receives_messages?
-      has_many :envelopes, :as => :receiver, :class_name => "Msg::Envelope"
-      
       class_eval {
         extend Msg::ReceiverClassMethods
         include Msg::ReceiverInstanceMethods
       }
-      
-      Msg.receiving_classes.push(self)
+      has_many :envelopes, :as => :receiver, :class_name => "Msg::Envelope"
+      Msg.add_receiving_class(self, options)
     end
   end
   

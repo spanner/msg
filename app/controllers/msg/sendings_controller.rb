@@ -2,6 +2,7 @@ module Msg
   class SendingsController < Msg::EngineController
     respond_to :html, :js
 
+    before_filter :get_message, :only => [:new, :create]
     before_filter :get_sending, :only => [:show]
     before_filter :build_sending, :only => [:new, :create]
     before_filter :get_sendings, :only => [:index]
@@ -29,6 +30,10 @@ module Msg
     end
 
   protected
+
+    def get_message
+      @message = Msg::Message.find(params[:message_id])
+    end
 
     def build_sending
       @sending = Msg::Sending.new(params[:sending])

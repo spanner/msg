@@ -1,3 +1,5 @@
+require 'mustache'
+
 module Msg
   class Message < ActiveRecord::Base
     attr_accessible :subject, :body, :function, :description, :transactional, :saved, :from_name, :from_address
@@ -13,6 +15,12 @@ module Msg
       name = from_name? ? from_name : Msg.default_from_name
       address = from_address? ? from_address : Msg.default_from_address
       "#{from_name || Msg.default_from_name} <#{from_address || Msg.default_from_address}>"
+    end
+    
+    def render_for(receiver)
+      values = receiver.for_email.reverse_merge(Msg.email_values)
+      rendered = Mustache.render(body, values)
+      ActionController::Base.helpers.sanitize(rendered, :tags => Msg.tags_allowed_in_email, :attributes => Msg.attributes_allowed_in_email)
     end
 
   end

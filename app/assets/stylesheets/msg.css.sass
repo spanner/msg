@@ -13,10 +13,41 @@ $red: #ed1c24
     p.description
       margin: 0
       color: $mid
+      font-size: 85%
     p.excerpt
       margin: 0
 
-#edit_message
+
+#preview_message, #send_message
+  width: 800px
+  .header
+    width: 770px
+  div.headers
+    position: relative
+    overflow: hidden
+    margin: 0
+    padding: 10px 0
+    width: 100%
+    background-color: #eee
+    font-size: 0.8em
+    a.submit
+      position: relative
+      float: right
+      margin: 5px 10px
+    p
+      margin: 0 20px
+    span.field
+      display: inline-block
+      width: 45px
+  iframe.body
+    position: relative
+    margin: 0
+    border: 0
+    width: 100%
+    height: 400px
+
+
+#message
   width: 800px
   .header
     width: 770px
@@ -29,6 +60,9 @@ $red: #ed1c24
         font-weight: bold
     div.messagebody
       position: relative
+      p.show_details
+        margin: 0 10px
+        float: right
       textarea
         width: 530px
         height: 400px
@@ -43,27 +77,28 @@ $red: #ed1c24
         ul
           list-style: none
           padding: 0
-    p.show_details
-      margin-bottom: 0
-    div.details
+    p.sender
+      margin: 0 0 12px 0
       input[type="text"]
         font-size: 1em
         float: left
         margin-bottom: 6px
-      p.sender
-        margin: 3px 0
-        input.from_name
-          width: 260px
-          margin-right: 10px
-        input.from_address
-          width: 460px
-      p.description
-        margin: 3px 0
-        input.description
-          width: 460px
-          margin-right: 10px
-        input.function
-          width: 260px
-          font-weight: bold
+      input.from_name
+        width: 260px
+        margin-right: 10px
+      input.from_address
+        width: 460px
+    p.description
+      margin: 3px 0
+      input[type="text"]
+        font-size: 1em
+        float: left
+        margin-bottom: 6px
+      input.description
+        width: 460px
+        margin-right: 10px
+      input.function
+        width: 260px
+        font-weight: bold
     div.buttons
       margin-top: 20px
