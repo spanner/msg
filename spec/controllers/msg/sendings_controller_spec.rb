@@ -4,13 +4,14 @@ module Msg
   describe SendingsController do
 
     before :each do
+      @routes = Msg::Engine.routes
       sign_in_admin
     end
 
     #new
     describe "GET #new" do
       it "should show the send-a-message form" do
-        get :new, { :use_route => :msg }
+        get :new, { }
         pending # response.body should contain form
       end
     end
@@ -19,12 +20,12 @@ module Msg
     describe "POST #create" do
       it "should create a sending" do
         expect {
-          post :create, { :sending => {}, :use_route => :msg }
+          post :create, { :sending => {} }
         }.to change(Msg::Sending, :count).by(1)
       end
       it "should create many envelopes" do
         expect {
-          post :create, { :sending => {}, :use_route => :msg }
+          post :create, { :sending => {} }
         }.to change(Msg::Envelope, :count)
       end
     end
