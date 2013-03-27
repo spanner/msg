@@ -5,7 +5,7 @@ Dummy::Application.configure do
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
-  config.cache_classes = true
+  config.cache_classes = false
 
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
@@ -28,6 +28,10 @@ Dummy::Application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
+
+  config.action_mailer.default_url_options = {
+    :host => "localhost"
+  }
 
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict

@@ -1,2 +1,10 @@
-%h3
-  = t :bounce_report
+- bounces ||= @bounces || Msg::Bounce.order('created_at DESC').limit(5)
+
+#bouncebox{:data => {:refreshable => true, :url => msg.bounces_path(:format => :js)}}
+  - if bounces.any?
+    %h3
+      = link_to t(:bounce_report), msg.bounces_url
+  
+    %ul.bounces
+      = render :partial => "msg/bounces/listing", :collection => bounces
+

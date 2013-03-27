@@ -1,1 +1,4 @@
-= @message.render_for(@receiver)
+- message ||= @message
+- receiver ||= @receiver
+
+= sanitize(message.render_for(receiver), :tags => Msg.tags_allowed_in_email, :attributes => Msg.attributes_allowed_in_email)

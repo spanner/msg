@@ -1,2 +1,8 @@
-%h3
-  = t :sent_report
+- sendings ||= @sendings || Msg::Sending.order('created_at DESC').limit(5)
+
+#sentbox{:data => {:refreshable => true, :url => msg.sendings_path(:format => :js, :show => 5)}}
+  %h3
+    = link_to t(:sent_report), msg.sendings_url
+    
+  %ul.sendings
+    = render :partial => "msg/sendings/listing", :collection => sendings

@@ -1,0 +1,45 @@
+- sending ||= @sending
+- message ||= @message
+- receiver ||= @receiver
+- klasses = Msg.receiving_classes
+
+= form_for [message, sending], :as => :sending do |f|
+
+  .receivers
+    - klasses.each do |klass|
+      - key = klass.underscore
+      
+      %h3
+        = t(:send_to)
+        = t("msg.#{key}") unless klasses.length == 1
+      
+      %ul.choose_group
+        - klass.constantize.messaging_groups.each_pair do |name, proc|
+          - count = proc.call.count
+          %li.group
+            = f.radio_button "#{key}_group", name, :data => {:action => "reveal", :converse => "ul.choose_receivers"}, :disabled => count == 0
+            %label{:for => "sending_#{key}_group_#{name}"} 
+              = t("msg.groups.#{name}")
+              %span.note
+                = t(:receiver_count, :count => count)
+            
+        %li.group
+          = f.radio_button "#{key}_group", :selected, :data => {:action => "reveal", :affected => "ul.choose_receivers"}
+          %label{:for => "sending_#{key}_group_selected"} 
+            = t("msg.groups.selected")
+          
+          %ul.choose_receivers
+            - klass.constantize.order('name ASC').each do |rec|
+              %li.receiver
+                = check_box_tag "sending[#{key}_receiver_ids][]", rec.id, false, :id => "sending_#{key}_receiver_ids_#{rec.id}"
+                %label{:for => "sending_#{key}_receiver_ids_#{rec.id}"}
+                  = rec.name
+
+  // #todo: update the preview on selection, and add a control to page through the selected group of people
+  %iframe.body{:src => msg.preview_message_url(message, :receiver_type => receiver.class.to_s.downcase.underscore.to_s, :receiver_id => receiver.id)}
+
+  .buttons
+    = f.submit t(:send_message)
+    = t :or
+    = link_to t(:close), "/", :class => 'cancel'
+

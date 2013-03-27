@@ -1,57 +1,199 @@
+$red: #ed1c24
+$green: #74b87a
+$dark: #616265
+$mid: #9a9b9d
+
 .message_list
   div.message
     margin-top: 5px
     margin-bottom: 20px
-    h2.name
-      margin-left: -32px
-      a.message
-        +big_icon_link("msg/message.png")
-        color: $text
-        +hover
     p.description
       margin: 0
       color: $mid
+      font-size: 85%
     p.excerpt
       margin: 0
 
-#edit_message
+.sending_list
+  div.sending
+    margin-top: 5px
+    margin-bottom: 20px
+    p.description
+      margin: 0
+      color: $mid
+      font-size: 85%
+    p.responses
+      margin: 0
+
+h2
+  a.message
+    margin-left: -32px
+    +big_icon_link("msg/message.png")
+    color: $text
+    +hover
+  a.sending
+    margin-left: -32px
+    +big_icon_link("msg/sending.png")
+    color: $text
+    +hover
+  
+#sending
+  position: relative
+  h2.subject
+    margin: 50px 0 30px -32px
+    margin-top: 50px
+    +big_icon_link("msg/sending.png")
+  .envelope
+    +box-shadow(1px 3px 8px $dark)
+    .headers
+      position: relative
+      overflow: hidden
+      margin: 0
+      padding: 10px 0
+      width: 100%
+      font-size: 0.8em
+      background-color: $palest
+      p
+        margin: 0 20px
+      span.field
+        display: inline-block
+        width: 45px  
+    iframe.body
+      width: 100%
+      height: 700px
+      background-color: white
+      border: 0
+
+ul.envelopes
+  padding: 0
+  margin: 0
+  list-style: none
+  li
+    &.unread
+      color: $mid
+    &.read
+      color: $green
+    &.bounced
+      color: $red
+
+#preview_message, #send_message
   width: 800px
   .header
-    width: 790px
-  div.instructions
-    position: absolute
-    width: 220px
-    right: 20px
-    top: 184px
-    color: $mid
-    font-size: 90%
-    ul
-      list-style: none
-      padding: 0
+    width: 770px
+  div.headers
+    position: relative
+    overflow: hidden
+    margin: 0
+    padding: 10px 0
+    width: 100%
+    font-size: 0.8em
+    p
+      margin: 0 20px
+    span.field
+      display: inline-block
+      width: 45px
+  form.new_sending
+    position: relative
+    margin-top: 0
+    iframe.body
+      position: relative
+      margin: 0 0 20px 0
+      width: 550px
+      height: 400px
+      background-color: white
+      border: 0
+      +box-shadow(1px 3px 8px $dark)
+    div.receivers
+      position: absolute
+      top: 0
+      right: 0
+      width: 196px
+      height: 400px
+      overflow: auto
+      font-size: 0.8em
+      h3
+        margin-top: 0
+      ul
+        margin: 0
+        padding: 0
+        list-style: none
+        &.choose_receivers
+          padding-left: 18px
+#message
+  width: 800px
+  .header
+    width: 770px
   form.message
-    width: 540px
-    p.subject, p.description
+    p.subject
       margin: 3px 0
       input[type="text"]
-        width: 760px
-    a.datepicker
-      color: $input
-    textarea.body
-      width: 530px
-      height: 400px
-      font-size: 1.2em
-    input.name
-      font-size: 2.5em
-      font-weight: bold
-    input.description
-      font-size: 1.2em
-    textarea.body
-      font-size: 1.2em
-    p.function
-      float: right
-      width: 280px
-      margin: 3px 0
+        width: 742px
+        font-size: 2.5em
+        font-weight: bold
+
+    p.sender
+      color: $mid
+      margin: 6px 0
       input[type="text"]
         font-size: 1em
-        width: 270px
-      
+        float: left
+        margin-bottom: 6px
+      input.from_name
+        width: 260px
+        margin-right: 10px
+      input.from_address
+        width: 460px
+
+    p.function
+      color: $mid
+      margin: 6px 0 12px 0
+      input[type="text"]
+        font-size: 1em
+      span.transactional_detail
+        display: block
+        float: right
+        margin: 0 4px
+        input[type="text"]
+          width: 510px
+
+    div.messagebody
+      position: relative
+      p.show_details
+        margin: 2px 220px 0 0
+        float: right
+      textarea
+        width: 530px
+        height: 360px
+        font-size: 1.2em
+      div.instructions
+        position: absolute
+        width: 205px
+        right: 0
+        top: 16px
+        color: $mid
+        font-size: 80%
+        ul
+          list-style: none
+          padding: 0
+          
+    p.saved
+      margin: 0 0 12px 0
+      span.saved_detail
+        display: block
+        margin: 6px 0
+        input[type="text"]
+          width: 742px
+          font-size: 1em
+        
+    div.buttons
+      margin-top: 20px
+
+#bouncebox, #receivers
+  margin-top: 200px
+
+#sentbox, #bouncebox
+  ul
+    padding: 0
+    list-style: none
+    li
+      margin-bottom: 6px

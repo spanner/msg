@@ -1,12 +1,12 @@
 require "spec_helper"
 
 module Msg
-  describe MsgDeviseMailer do
+  describe DeviseMailer do
 
     context "sending a transactional message" do
       before do
-        @user = 
-        @email = Msg::MsgDeviseMailer.message_in_envelope(envelope).deliver
+        # @email = Msg::DeviseMailer
+        # @email.deliver
       end
 
       it "should have the right to: address"

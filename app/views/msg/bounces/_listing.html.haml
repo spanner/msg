@@ -1,0 +1,5 @@
+- bounce ||= listing
+
+%li.bounce
+  = bounce.envelope.email
+  = l(bounce.created_at, :format => :natural_with_date)

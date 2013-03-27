@@ -9,19 +9,20 @@ module Msg
                  :default_from_name,
                  :email_bcc,
                  :email_values,
-                 :group_scopes,
+                 :messaging_groups,
                  :receiving_classes,
                  :sanitized_allowed_tags,
                  :sanitized_allowed_attributes,
                  :sending_domain,
                  :ses_access_key_id,
                  :ses_secret_access_key
-  
+
   class MsgError < StandardError; end
   class EmailInvalid < MsgError; end
-  
+
+
   class << self
-    
+
     def setup
       yield self
     end
@@ -45,33 +46,42 @@ module Msg
     def default_from_name
       @@default_from_name ||= "Someone Unknown"
     end
-    
-    def email_values
-      @@email_values ||= {}
+
+    def default_from
+      "#{default_from_name} <#{default_from_address}>"
     end
 
-    def group_scopes
-      @@group_scopes ||= []
-    end
-    
-    def add_group_scope(scope)
-      group_scopes.push(scope)
+    def email_values
+      @@email_values ||= {}
     end
 
     def receiving_classes
       @@receiving_classes ||= []
     end
-    
+
     def tags_allowed_in_email
       @@permitted_tags ||= ActionView::Base.sanitized_allowed_tags
     end
-    
+
     def attributes_allowed_in_email
       @@permitted_attributes ||= ActionView::Base.sanitized_allowed_attributes
     end
-    
+
     def sending_domain
       @@sending_domain ||= ActionMailer::Base.default_url_options[:host]
+    end
+
+
+
+
+
+    def add_receiving_class(klass, options)
+      Rails.logger.warn ">>> Msg.add_receiving_class #{klass}"
+      
+      k = klass.to_s
+      receiving_classes << k unless receiving_classes.include?(k)
+      klass.messaging_groups = options[:groups] || []
+      Msg::Sending.add_receiver_hooks(klass, options)
     end
 
   end

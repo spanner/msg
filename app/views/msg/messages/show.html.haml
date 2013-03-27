@@ -1,8 +1,25 @@
-#main.message
-  = render :partial => "msg/messages/preview", :locals => {:message => @message}
+#preview_message
+  .header
+    = link_to "X", '#', :class => "closer", :data => {:action => "close"}
+    %h2
+      = t :preview_message
+  .headers
+    %p
+      %span.field
+        = t(:subject).titlecase + ":"
+      %strong
+        = @message.subject
+    %p
+      %span.field
+        = t(:to).titlecase + ":"
+      %strong
+        = @receiver.email
+    %p
+      %span.field
+        = t(:from).titlecase + ":"
+      %strong
+        = @message.from
 
--content_for :margin do
-  = render :partial => "msg/sendings/report", :locals => {:message => @message}
+  - sending = @message.sendings.build
+  = render :partial => "msg/sendings/form", :locals => {:sending => sending}
 
--content_for :title do
-  = t :messages
