@@ -7,7 +7,7 @@
   %h2.section
     = t :saved_messages
     %span.action
-      = link_to t(:add_message), msg.new_message_url, :class => "add minimal", :data => {:action => "popup", :affected => "#saved_messages"}
+      = link_to t(:create_message), msg.new_message_url, :class => "add minimal", :data => {:action => "popup", :affected => "#saved_messages"}
   = render "msg/messages/saved_messages"
 
 

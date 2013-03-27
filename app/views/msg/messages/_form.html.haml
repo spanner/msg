@@ -2,17 +2,17 @@
   %p.subject
     = f.text_field :subject, :class => 'name', :placeholder => t(:message_subject)
 
-  %p.description.messagedetail
-    = f.text_field :description, :class => "description", :placeholder => t(:message_description)
-    = f.text_field :function, :class => "function", :placeholder => t(:message_function)
-
   %p.sender.messagedetail
-    = f.text_field :from_name, :class => 'from_name', :placeholder => t(:message_from_name)
-    = f.text_field :from_address, :class => 'from_address', :placeholder => t(:message_from_address)
+    = f.text_field :from_name, :class => 'from_name', :placeholder => t(:from) + ": " + Msg.default_from_name
+    = f.text_field :from_address, :class => 'from_address', :placeholder => Msg.default_from_address
+        
+  %p.function.messagedetail
+    %span.transactional_detail
+      = f.text_field :function, :class => "function", :placeholder => t(:message_function)
+    = f.check_box :transactional, :data => {:action => "reveal", :affected => ".transactional_detail", :converse => ".saved"}
+    = f.label :transactional, t(:transactional_message)
     %span.formnote
-      = t(:message_from_note)
-      %strong
-        = Msg.default_from
+      = t :transactional_message_note
 
   .messagebody.wysihtml
     %p.show_details
@@ -23,9 +23,16 @@
       = render 'msg/shared/toolbar'
     = f.text_area :body, :id => 'd1', :class => "body"
 
+  %p.saved
+    = f.check_box :saved, :data => {:action => "reveal", :affected => ".saved_detail"}
+    = f.label :saved, t(:save_for_reuse)
+    %span.formnote
+      = t :saved_note
+    %span.saved_detail
+      = f.text_field :description, :class => "description", :placeholder => t(:message_description)
 
   .buttons
-    = f.submit t(:save_message)
+    = f.submit t(:save_and_preview)
     = t :or
     = link_to t(:cancel), "/", :class => 'cancel'
 

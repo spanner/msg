@@ -2,10 +2,14 @@ en:
   activerecord:
     attributes:
       msg:
+        message:
+          saved: "Save this message for reuse"
     errors:
       msg:
-  msg: "Messaging"
+  from: "From"
   bounce_report: "Bounces"
+  close: "close"
+  create_message: "create a new message"
   sent_report: "Sent box"
   messages: "Messages"
   please_set_layout: "You probably want to set Msg.layout (in an initializer) so that msg uses your application layout and not this default file."
@@ -14,16 +18,18 @@ en:
   from: "From"
   message_subject: "Subject"
   message_body: "Body"
-  message_description: "Description (for administration)"
+  message_description: "Description (for your reference: does not appear in message)"
   message_subject: "Subject"
   message_function: "Function"
   message_from_address: "Sender email address"
   message_from_name: "Sender name"
   message_from_note: "Leave both address fields blank to use the default"
   save_message: "Save message"
+  save_and_preview: "Save and preview"
   send_message: "send message"
   send_the_message: "Send the message"
   preview_message: "preview message"
+  preview_and_send: "preview and send"
   delete_message: "delete message"
   transactional_messages: "Administrative messages"
   saved_messages: "Saved messages"
@@ -32,7 +38,12 @@ en:
   subject: "Subject"
   more_detail: "More detail"
   to: "To"
+  save_for_reuse: "Save this message for reuse"
+  saved_note: "'Saving' the message adds it to the main message list, making it easier to send again. Unsaved messages can still be found in the sent box and resent from there."
+  sender: "Sender's name and address"
   send_to: "Send to"
+  transactional_message: "Transactional message"
+  transactional_message_note: "You probably don't want to change this."
   date:
     formats:
       dashed_short_date_format: "%d-%m-%Y"

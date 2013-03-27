@@ -20,6 +20,7 @@ module Msg
   class MsgError < StandardError; end
   class EmailInvalid < MsgError; end
 
+
   class << self
 
     def setup
@@ -54,14 +55,6 @@ module Msg
       @@email_values ||= {}
     end
 
-    def messaging_groups
-      @@group_scopes ||= {}
-    end
-
-    def add_group_scope(scope)
-      group_scopes.push(scope)
-    end
-
     def receiving_classes
       @@receiving_classes ||= []
     end
@@ -83,9 +76,11 @@ module Msg
 
 
     def add_receiving_class(klass, options)
-      klass = klass.to_s
-      receiving_classes << klass unless receiving_classes.include?(klass)
-      messaging_groups[klass.underscore] = options[:groups] || []
+      k = klass.to_s
+      unless receiving_classes.include?(k)
+        receiving_classes << k 
+        klass.messaging_groups = options[:groups] || []
+      end
     end
 
   end

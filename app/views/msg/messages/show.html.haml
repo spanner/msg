@@ -4,7 +4,6 @@
     %h2
       = t :preview_message
   .headers
-    = link_to t(:send_this_message), msg.new_message_sending_url(@message), :class => "submit"
     %p
       %span.field
         = t(:subject).titlecase + ":"
@@ -20,11 +19,7 @@
         = t(:from).titlecase + ":"
       %strong
         = @message.from
-  %iframe.body{:src => msg.preview_message_url(@message, :receiver_type => @receiver.class.to_s.downcase.underscore.to_s, :receiver_id => @receiver.id)}
 
+  - sending = @message.sendings.build
+  = render :partial => "msg/sendings/form", :locals => {:sending => sending}
 
--content_for :margin do
-  = render :partial => "msg/sendings/report", :locals => {:message => @message}
-
--content_for :title do
-  = t :messages

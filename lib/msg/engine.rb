@@ -3,7 +3,7 @@ module Msg
     isolate_namespace Msg
 
     initializer "msg.integration" do
-      ActiveRecord::Base.send :include, Msg::Receivers
+      ActiveRecord::Base.send :extend, Msg::ActiveRecordClassMethods
       ActiveSupport.on_load :action_controller do
         helper Msg::MsgHelper
       end
