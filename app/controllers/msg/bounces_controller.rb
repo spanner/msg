@@ -45,11 +45,10 @@ module Msg
       else
         mail = params['Message']['mail']
         bounce = params['Message']['bounce']
-        ap params
         if envelope = Msg::Envelope.find_by_email_id(mail['messageId'])
           envelope.bounces.create({
-            :type => bounce['bounceType'],
-            :subtype => bounce['bounceSubType'],
+            :bounce_type => bounce['bounceType'],
+            :bounce_subtype => bounce['bounceSubType'],
             :reporter => bounce['reportingMTA'],
             :raw_message => JSON.dump(bounce)
           })

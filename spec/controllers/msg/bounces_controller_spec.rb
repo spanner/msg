@@ -13,7 +13,6 @@ module Msg
     describe "POST #create" do
       it "should file a new bounce" do
         envelope = FactoryGirl.create(:valid_envelope)
-        ap envelope
         bounce = {
           "notificationType" => "Bounce",
           "bounce" => {

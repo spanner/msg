@@ -26,14 +26,17 @@ module Msg
       end
       it "should create many envelopes" do
         expect {
-          post :create, { :message_id => @message.id,:sending => {} }
+          post :create, { :message_id => @message.id, :sending => {} }
         }.to change(Msg::Envelope, :count)
       end
     end
 
     #update
     describe "PUT #update" do
-      it "should not update"
+      it "should not update" do
+        sending = FactoryGirl.create(:sending, :message => @message)
+        post :update, { :message_id => @message.id, :sending_id => sending.id }
+      end
     end
 
     #show

@@ -27,9 +27,7 @@ module Msg
       end
 
       it "should have the right message id" do
-        ap @email["Message-ID"].inspect
-        ap @envelope.email_id.class
-        @email["Message-ID"].should == @envelope.email_id
+        @email["Message-ID"].should eq @envelope.email_id
       end
 
     end
