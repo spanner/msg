@@ -4,24 +4,43 @@ module Msg
 
     belongs_to :message
     belongs_to :created_by, :class_name => Msg.user_class
-
     has_many :envelopes, :dependent => :destroy
-    accepts_nested_attributes_for :envelopes
 
-    def self.add_receiving_class(klass, options)
+    def receivers=(receivers)
+      receivers.each do |rec|
+        self.envelopes.build(:receiver => rec, :sending => self)
+      end
+    end
+
+    def self.add_receiver_hooks(klass, options)
+      Rails.logger.warn ">>> Msg::Sending.add_receiver_hooks #{klass}"
+
       key = klass.to_s.underscore
-      # group= is called from the SendingsController and given the _name_ of a messaging group,
+
+      define_method  :"#{key}_group" do
+        self.receiving_group if self.receiving_class == key
+      end
+
+      # class_group= is called from the SendingsController and given the _name_ of a messaging group,
       # we get the designated proc from the class messaging rules, then call it to get an array of receivers
+      #
       define_method  :"#{key}_group=" do |name|
-        send :"#{key}_receivers=", klass.messaging_rules[name].call
+        self.receiving_class = key
+        self.receiving_group = name
+        self.receivers = klass.messaging_rules[name].call unless name == 'selected'
       end
+      attr_accessible :"#{key}_group"
+      
+      define_method  :"#{key}_receiver_ids" do
+        self.envelopes.map(&:receiver_id) if self.receiving_class == key
+      end
+      attr_accessible :"#{key}_receiver_ids"
+
+      # class_receiver_ids= is called from the SendingsController and given a list of receiver ids of this class.
+      # they are instantiated and passed to receivers=
+      #
       define_method :"#{key}_receiver_ids=" do |ids|
-        send :"#{key}_receivers=", klass.find(ids)
-      end
-      define_method :"#{key}_receivers=" do |receivers|
-        receivers.each do |receiver|
-          envelopes.build(:receiver => receiver)
-        end
+        self.receivers = klass.find(ids)
       end
     end
 

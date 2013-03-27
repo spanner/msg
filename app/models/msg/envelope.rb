@@ -1,7 +1,8 @@
 
 module Msg
   class Envelope < ActiveRecord::Base
-
+    attr_accessible :receiver, :sending
+    
     belongs_to :sending
     belongs_to :receiver, :polymorphic => true
     has_many :bounces
@@ -30,6 +31,11 @@ module Msg
     end
 
     def send_email
+      Rails.logger.warn "preparing email for envelope #{self.inspect}"
+      Rails.logger.warn "sending is #{sending.inspect}"
+      Rails.logger.warn "message is #{message.inspect}"
+      
+      
       self.email_id = "#{self.id}@#{Msg.sending_domain}"
       self.subject = message.subject
       self.from_address = message.from

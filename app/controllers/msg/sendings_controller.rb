@@ -36,7 +36,7 @@ module Msg
     end
 
     def build_sending
-      @sending = Msg::Sending.new()
+      @sending = @message.sendings.build
     end
 
     def get_sending
