@@ -25,7 +25,8 @@ module Msg
   protected
   
     def render_with_tracker
-      message.render_for(receiver) + %{<img src="#{url_to_open}" />}
+      "#{message.render_for(receiver)}<img src=\"#{url_to_open}\" />"
+      # message.render_for(receiver) + %{<img src="#{url_to_open}" />}
     end
 
     def send_email
