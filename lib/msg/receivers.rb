@@ -1,42 +1,44 @@
+# Msg::Receivers is for inclusion into ActiveRecord::Base...
+
 module Msg
   module Receivers
     def self.included(base)
-      base.extend MsgClassMethods
+      base.extend ActiveRecordClassMethods
     end
   end
   
-  module MsgClassMethods
-
-    def receives_messages?
-      false
-    end
-
+  module ActiveRecordClassMethods
+    # +receives_messages+ ...
+    
     def receives_messages(options)
-      return if receives_messages?
-      class_eval {
-        extend Msg::ReceiverClassMethods
-        include Msg::ReceiverInstanceMethods
-      }
+      include ReceiverInstanceMethods
       has_many :envelopes, :as => :receiver, :class_name => "Msg::Envelope"
       Msg.add_receiving_class(self, options)
     end
+    
+    
+    # Messaging groups are usually defined by passing a :groups parameter to `receives_messages`, 
+    # but you can also override the messaging_groups methods if that's easier.
+    #
+    def messaging_groups
+      @messaging_groups ||= []
+    end
+    
+    def messaging_groups=(groups)
+      @messaging_groups = groups
+    end
+    
   end
   
-  module ReceiverClassMethods
-    def receives_messages?
-      true
-    end
-  end
-
   module ReceiverInstanceMethods
-
-    def unopened_envelopes
-      envelopes.unopened
-    end
-
-    def opened_envelopes
-      envelopes.opened
-    end
-
+    
+    
+    
   end
 end
+
+
+
+
+
+

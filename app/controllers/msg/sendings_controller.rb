@@ -16,6 +16,7 @@ module Msg
     end
 
     def new
+      @klasses = Msg.receiving_classes
       respond_with @sending
     end
 

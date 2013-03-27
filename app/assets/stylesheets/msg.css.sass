@@ -58,10 +58,36 @@ $red: #ed1c24
         width: 742px
         font-size: 2.5em
         font-weight: bold
+
+    p.sender
+      color: $mid
+      margin: 6px 0
+      input[type="text"]
+        font-size: 1em
+        float: left
+        margin-bottom: 6px
+      input.from_name
+        width: 260px
+        margin-right: 10px
+      input.from_address
+        width: 460px
+
+    p.function
+      color: $mid
+      margin: 6px 0 12px 0
+      input[type="text"]
+        font-size: 1em
+      span.transactional_detail
+        display: block
+        float: right
+        margin: 0 4px
+        input[type="text"]
+          width: 510px
+
     div.messagebody
       position: relative
       p.show_details
-        margin: 0 10px
+        margin: 2px 220px 0 0
         float: right
       textarea
         width: 530px
@@ -77,28 +103,15 @@ $red: #ed1c24
         ul
           list-style: none
           padding: 0
-    p.sender
+          
+    p.saved
       margin: 0 0 12px 0
-      input[type="text"]
-        font-size: 1em
-        float: left
-        margin-bottom: 6px
-      input.from_name
-        width: 260px
-        margin-right: 10px
-      input.from_address
-        width: 460px
-    p.description
-      margin: 3px 0
-      input[type="text"]
-        font-size: 1em
-        float: left
-        margin-bottom: 6px
-      input.description
-        width: 460px
-        margin-right: 10px
-      input.function
-        width: 260px
-        font-weight: bold
+      span.saved_detail
+        display: block
+        margin: 6px 0
+        input[type="text"]
+          width: 742px
+          font-size: 1em
+        
     div.buttons
       margin-top: 20px

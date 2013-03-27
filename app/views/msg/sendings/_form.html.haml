@@ -1,7 +1,8 @@
 = form_for @sending, :html => {:class => 'edit sending', :remote => true, :data => {:type => :html}} do |f|
 
-  - Msg.receiving_classes.each do |klass|
+  - @klasses.each do |klass|
     - key = klass.underscore
+
     %h3
       = t(:send_to)
       = t("msg.#{key}")

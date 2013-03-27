@@ -4,7 +4,6 @@
     %h2
       = t :preview_message
   .headers
-    = link_to t(:send_this_message), msg.new_message_sending_url(@message), :class => "submit"
     %p
       %span.field
         = t(:subject).titlecase + ":"

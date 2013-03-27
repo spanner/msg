@@ -8,7 +8,7 @@ module Msg
     belongs_to :created_by, :class_name => Msg.user_class
 
     scope :transactional, where(:transactional => true)
-    scope :saved, where(:saved => true)
+    scope :saved, where(:saved => true, :transactional => false)
     scope :unsaved, where(:saved => false)
 
     def from
