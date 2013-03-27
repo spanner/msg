@@ -80,6 +80,7 @@ module Msg
       unless receiving_classes.include?(k)
         receiving_classes << k 
         klass.messaging_groups = options[:groups] || []
+        Msg::Sending.add_receiving_class(klass, options)
       end
     end
 

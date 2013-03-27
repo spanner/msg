@@ -24,6 +24,10 @@ en:
   message_from_address: "Sender email address"
   message_from_name: "Sender name"
   message_from_note: "Leave both address fields blank to use the default"
+  receiver_count:
+    zero: "(nobody)"
+    one: "(one person)"
+    other: "(%{count} people)"
   save_message: "Save message"
   save_and_preview: "Save and preview"
   send_message: "send message"
