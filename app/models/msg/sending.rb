@@ -10,8 +10,10 @@ module Msg
 
     def self.add_receiving_class(klass, options)
       key = klass.to_s.underscore
-      define_method  :"#{key}_groups=" do |scope_name|
-        send :"#{key}_receiver_ids=", klass.send(scope_name.to_sym)
+      # group= is called from the SendingsController and given the _name_ of a messaging group,
+      # we get the designated proc from the class messaging rules, then call it to get an array of receivers
+      define_method  :"#{key}_group=" do |name|
+        send :"#{key}_receivers=", klass.messaging_rules[name].call
       end
       define_method :"#{key}_receiver_ids=" do |ids|
         send :"#{key}_receivers=", klass.find(ids)

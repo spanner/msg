@@ -13,12 +13,12 @@
         = t("msg.#{key}") unless klasses.length == 1
       
       %ul.choose_group
-        - klass.constantize.messaging_groups.each do |grp|
-          - count = klass.constantize.send(grp).count
+        - klass.constantize.messaging_groups.each_pair do |name, proc|
+          - count = proc.call.count
           %li.group
-            = radio_button sending, "#{key}_group", grp, :data => {:action => "reveal", :converse => "ul.choose_receivers"}, :disabled => count == 0
-            %label{:for => "#{key}_group_#{grp}"} 
-              = t("msg.groups.#{grp}")
+            = radio_button sending, "#{key}_group", name, :data => {:action => "reveal", :converse => "ul.choose_receivers"}, :disabled => count == 0
+            %label{:for => "#{key}_group_#{name}"} 
+              = t("msg.groups.#{name}")
               %span.note
                 = t(:receiver_count, :count => count)
             
