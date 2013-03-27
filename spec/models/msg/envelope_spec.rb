@@ -49,11 +49,15 @@ module Msg
     end
 
     it "should render the message contents" do
-      @envelope.send(:render_message).should eq "#{@message.body}<img src=\"#{@envelope.url_to_open}\" />"
+      @envelope.send(:render_with_tracker).should eq "#{@message.body}<img src=\"#{@envelope.url_to_open}\" />"
     end
 
     it "should append a tracker dot to the message"
-    it "should send the message"
+    it "should send the message" do
+      @envelope.send(:send_email)
+      @envelope.sent_at.should_not be_nil
+      pending "test for send"
+    end
 
   end
 end

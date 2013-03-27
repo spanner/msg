@@ -1,5 +1,6 @@
 require "spec_helper"
-
+include EmailSpec::Helpers
+include EmailSpec::Matchers
 module Msg
   describe MsgMailer do
 
@@ -11,12 +12,23 @@ module Msg
       end
 
       it "should have the right to: address" do
-        pending
+        @email.should deliver_to "#{@envelope.receiver.name} <#{@envelope.receiver.email}>"
       end
-      it "should have the right from: address"
-      it "should have the right subject"
-      it "should have the right body"
-      it "should have the right message id"
+
+      it "should have the right from: address" do
+        @email.should deliver_from @envelope.from_address
+      end
+      it "should have the right subject" do
+        @email.should have_subject @envelope.subject
+      end
+
+      it "should have the right body" do
+        @email.should have_body_text @envelope.send(:render_with_tracker)
+      end
+
+      it "should have the right message id" do
+        @email["Message-ID"].should eq @envelope.email_id
+      end
 
     end
 
