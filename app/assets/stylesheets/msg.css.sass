@@ -1,4 +1,5 @@
 $red: #ed1c24
+$dark: #616265
 
 .message_list
   div.message
@@ -28,25 +29,39 @@ $red: #ed1c24
     margin: 0
     padding: 10px 0
     width: 100%
-    background-color: #eee
     font-size: 0.8em
-    a.submit
-      position: relative
-      float: right
-      margin: 5px 10px
     p
       margin: 0 20px
     span.field
       display: inline-block
       width: 45px
-  iframe.body
+  form.new_sending
     position: relative
-    margin: 0
-    border: 0
-    width: 100%
-    height: 400px
-
-
+    margin-top: 0
+    iframe.body
+      position: relative
+      background-color: white
+      margin: 0 0 20px 0
+      border: 0
+      width: 550px
+      height: 400px
+      +box-shadow(1px 3px 8px $dark)
+    div.receivers
+      position: absolute
+      top: 0
+      right: 0
+      width: 196px
+      height: 400px
+      overflow: auto
+      font-size: 0.8em
+      h3
+        margin-top: 0
+      ul
+        margin: 0
+        padding: 0
+        list-style: none
+        &.choose_receivers
+          padding-left: 18px
 #message
   width: 800px
   .header
@@ -91,7 +106,7 @@ $red: #ed1c24
         float: right
       textarea
         width: 530px
-        height: 400px
+        height: 360px
         font-size: 1.2em
       div.instructions
         position: absolute

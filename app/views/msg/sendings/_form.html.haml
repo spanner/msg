@@ -1,24 +1,38 @@
-= form_for @sending, :html => {:class => 'edit sending', :remote => true, :data => {:type => :html}} do |f|
+- sending ||= @sending
+- message ||= @message
+- receiver ||= @receiver
+- klasses = Msg.receiving_classes
 
-  - @klasses.each do |klass|
-    - key = klass.underscore
-
-    %h3
-      = t(:send_to)
-      = t("msg.#{key}")
-
-    %ul.groups
-      - Msg.messaging_groups[klass.underscore].each do |grp|
+= form_for sending do |f|
+  .receivers
+    - klasses.each do |klass|
+      - key = klass.underscore
+      
+      %h3
+        = t(:send_to)
+        = t("msg.#{key}") unless klasses.length == 1
+      
+      %ul.choose_group
+        - klass.constantize.messaging_groups.each do |grp|
+          %li.group
+            = radio_button sending, "#{key}_group", grp, :data => {:action => "reveal", :converse => "ul.choose_receivers"}
+            = t("msg.groups.#{grp}")
+            
         %li.group
-          = radio_button @sending, "groups_#{key}", grp, 
-          = t("msg.groups.#{grp}")
+          = radio_button sending, "#{key}_group", :selected, :data => {:action => "reveal", :affected => "ul.choose_receivers"}
+          = t("msg.groups.selected")
+          
+          %ul.choose_receivers
+            - klass.constantize.all.each do |rec|
+              %li.receiver
+                = check_box sending, "receivers_#{key}[]", {}, rec.id
+                %label{:for => "receivers_#{key}_#{rec.id}"}
+                  = rec.name
 
-
-
-
+  %iframe.body{:src => msg.preview_message_url(message, :receiver_type => receiver.class.to_s.downcase.underscore.to_s, :receiver_id => receiver.id)}
 
   .buttons
     = f.submit t(:send_message)
     = t :or
-    = link_to t(:cancel), "/", :class => 'cancel'
+    = link_to t(:close), "/", :class => 'cancel'
 

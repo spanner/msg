@@ -7,8 +7,9 @@ en:
     errors:
       msg:
   from: "From"
-  msg: "Messaging"
   bounce_report: "Bounces"
+  close: "close"
+  create_message: "create a new message"
   sent_report: "Sent box"
   messages: "Messages"
   please_set_layout: "You probably want to set Msg.layout (in an initializer) so that msg uses your application layout and not this default file."

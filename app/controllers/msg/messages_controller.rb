@@ -73,13 +73,11 @@ module Msg
     
     def get_receiver
       klass = params[:receiver_type] || Msg.receiving_classes.first
-      Rails.logger.warn ">>> receiver class #{klass}"
       if id = params[:receiver_id]
         @receiver = klass.classify.constantize.find(id)
       else
         @receiver = klass.classify.constantize.first
       end
-      Rails.logger.warn ">>> receiver #{@receiver}"
       raise ActiveRecord::RecordNotFound, "Cannot find a valid receiver for whom to preview message." unless @receiver
     end
 

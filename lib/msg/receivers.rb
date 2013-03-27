@@ -21,11 +21,12 @@ module Msg
     # but you can also override the messaging_groups methods if that's easier.
     #
     def messaging_groups
-      @messaging_groups ||= []
+      Thread.current["messaging_groups_#{self.to_s.underscore}"]  ||= []
+      # @messaging_groups ||= []
     end
     
     def messaging_groups=(groups)
-      @messaging_groups = groups
+      Thread.current["messaging_groups_#{self.to_s.underscore}"] = [groups].flatten
     end
     
   end
