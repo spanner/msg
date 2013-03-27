@@ -11,7 +11,11 @@ Msg::Engine.routes.draw do
     end
   end
 
-  resources :sendings
+  resources :sendings do
+    member do
+      get :review
+    end
+  end
 
   # envelopes#show is pinged when a message is opened
   resources :envelopes, :only => [:show]

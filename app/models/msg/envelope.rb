@@ -1,4 +1,3 @@
-
 module Msg
   class Envelope < ActiveRecord::Base
     attr_accessible :receiver, :sending
@@ -11,6 +10,11 @@ module Msg
     validates :sending, :presence => true
     after_create :send_email
 
+    scope :opened, where("opened_at IS NOT NULL")
+    scope :bounced, select("msg_envelopes.*")
+                  .joins("LEFT OUTER JOIN msg_bounces as mb ON mb.envelope_id = msg_envelopes.id")
+                  .having("count(mb.id) > 0")
+
     def message
       sending.message
     end
@@ -18,32 +22,34 @@ module Msg
     def open!
       update_column(:opened_at, Time.now)
     end
-
-    def url_to_open
-      Msg::Engine.routes.url_helpers.envelope_url(self, :host => ActionMailer::Base.default_url_options[:host], :format => :png)
+    
+    def status
+      if opened_at?
+        "read"
+      elsif bounces.any?
+        "bounced"
+      else
+        "unread"
+      end
     end
 
   protected
-  
-    def render_with_tracker
-      "#{message.render_for(receiver)}<img src=\"#{url_to_open}\" />"
-      # message.render_for(receiver) + %{<img src="#{url_to_open}" />}
-    end
 
     def send_email
-      Rails.logger.warn "preparing email for envelope #{self.inspect}"
-      Rails.logger.warn "sending is #{sending.inspect}"
-      Rails.logger.warn "message is #{message.inspect}"
-      
-      
+      # Record sending parameters for later reference. The message or receiver properties might change after this is sent.
       self.email_id = "#{self.id}@#{Msg.sending_domain}"
       self.subject = message.subject
       self.from_address = message.from
       self.to_address = receiver.email
-      self.contents = render_with_tracker
+      # render the message for our receiver
+      self.contents = message.render_for(receiver)
+      # send it
       Msg::MsgMailer.message_in_envelope(self).deliver
+      # note sending time
+      Rails.logger.warn "setting envelope.sent_at to "
       self.sent_at = Time.now
-      self.save
+      # and save our changes
+      self.save!
     end
 
   end

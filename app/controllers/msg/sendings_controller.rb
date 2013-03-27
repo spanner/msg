@@ -3,16 +3,22 @@ module Msg
     respond_to :html, :js
 
     before_filter :get_message, :only => [:new, :create]
-    before_filter :get_sending, :only => [:show]
+    before_filter :get_sending, :only => [:show, :review]
     before_filter :build_sending, :only => [:new, :create]
     before_filter :get_sendings, :only => [:index]
 
     def index
-      respond_with @sendings
+      respond_with @sendings do |format|
+        format.js { render :partial => "report"}
+      end
     end
 
     def show
       respond_with @sending
+    end
+    
+    def review
+      respond_with @sending, :layout => Msg.email_layout
     end
 
     def new
@@ -46,7 +52,7 @@ module Msg
     def get_sendings
       @show = params[:show] || 10
       @page = params[:page] || 1
-      @sendings = Msg::Sending.page(@page).per(@show)
+      @sendings = Msg::Sending.order("created_at DESC").page(@page).per(@show)
     end
   end
 end

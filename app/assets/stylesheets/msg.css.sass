@@ -1,16 +1,12 @@
 $red: #ed1c24
+$green: #74b87a
 $dark: #616265
+$mid: #9a9b9d
 
 .message_list
   div.message
     margin-top: 5px
     margin-bottom: 20px
-    h2.name
-      margin-left: -32px
-      a.message
-        +big_icon_link("msg/message.png")
-        color: $text
-        +hover
     p.description
       margin: 0
       color: $mid
@@ -18,6 +14,67 @@ $dark: #616265
     p.excerpt
       margin: 0
 
+.sending_list
+  div.sending
+    margin-top: 5px
+    margin-bottom: 20px
+    p.description
+      margin: 0
+      color: $mid
+      font-size: 85%
+    p.responses
+      margin: 0
+
+h2
+  a.message
+    margin-left: -32px
+    +big_icon_link("msg/message.png")
+    color: $text
+    +hover
+  a.sending
+    margin-left: -32px
+    +big_icon_link("msg/sending.png")
+    color: $text
+    +hover
+  
+#sending
+  position: relative
+  h2.subject
+    margin: 50px 0 30px -32px
+    margin-top: 50px
+    +big_icon_link("msg/sending.png")
+  .envelope
+    +box-shadow(1px 3px 8px $dark)
+    .headers
+      position: relative
+      overflow: hidden
+      margin: 0
+      padding: 10px 0
+      width: 100%
+      font-size: 0.8em
+      background-color: $palest
+      p
+        margin: 0 20px
+      span.field
+        display: inline-block
+        width: 45px  
+    iframe.body
+      width: 100%
+      height: 700px
+      background-color: white
+      border: 0
+
+ul.envelopes
+  padding: 0
+  margin: 0
+  list-style: none
+  li
+    &.unread
+      color: $mid
+    &.read
+      color: $green
+    &.bounced
+      color: $red
 
 #preview_message, #send_message
   width: 800px
@@ -40,11 +97,11 @@ $dark: #616265
     margin-top: 0
     iframe.body
       position: relative
-      background-color: white
       margin: 0 0 20px 0
-      border: 0
       width: 550px
       height: 400px
+      background-color: white
+      border: 0
       +box-shadow(1px 3px 8px $dark)
     div.receivers
       position: absolute
@@ -130,3 +187,13 @@ $dark: #616265
         
     div.buttons
       margin-top: 20px
+
+#bouncebox, #receivers
+  margin-top: 200px
+
+#sentbox, #bouncebox
+  ul
+    padding: 0
+    list-style: none
+    li
+      margin-bottom: 6px

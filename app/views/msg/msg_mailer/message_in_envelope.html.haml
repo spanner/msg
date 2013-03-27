@@ -1,0 +1,2 @@
+= sanitize(@contents.html_safe, :tags => Msg.tags_allowed_in_email, :attributes => Msg.attributes_allowed_in_email)
+%img{:src => msg.envelope_url(@envelope)}

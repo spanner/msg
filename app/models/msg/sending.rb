@@ -13,8 +13,6 @@ module Msg
     end
 
     def self.add_receiver_hooks(klass, options)
-      Rails.logger.warn ">>> Msg::Sending.add_receiver_hooks #{klass}"
-
       key = klass.to_s.underscore
 
       define_method  :"#{key}_group" do
@@ -27,7 +25,7 @@ module Msg
       define_method  :"#{key}_group=" do |name|
         self.receiving_class = key
         self.receiving_group = name
-        self.receivers = klass.messaging_rules[name].call unless name == 'selected'
+        self.receivers = klass.messaging_groups[name.to_sym].call unless name == 'selected'
       end
       attr_accessible :"#{key}_group"
       

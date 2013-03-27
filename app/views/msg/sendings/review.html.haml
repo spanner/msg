@@ -1,0 +1,2 @@
+- if @sending.envelopes.any?
+  = sanitize(@sending.envelopes.first.contents.html_safe , :tags => Msg.tags_allowed_in_email, :attributes => Msg.attributes_allowed_in_email)
