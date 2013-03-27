@@ -14,16 +14,20 @@
       
       %ul.choose_group
         - klass.constantize.messaging_groups.each do |grp|
+          - count = klass.constantize.send(grp).count
           %li.group
-            = radio_button sending, "#{key}_group", grp, :data => {:action => "reveal", :converse => "ul.choose_receivers"}
-            = t("msg.groups.#{grp}")
+            = radio_button sending, "#{key}_group", grp, :data => {:action => "reveal", :converse => "ul.choose_receivers"}, :disabled => count == 0
+            %label{:for => "#{key}_group_#{grp}"} 
+              = t("msg.groups.#{grp}")
+              %span.note
+                = t(:receiver_count, :count => count)
             
         %li.group
           = radio_button sending, "#{key}_group", :selected, :data => {:action => "reveal", :affected => "ul.choose_receivers"}
           = t("msg.groups.selected")
           
           %ul.choose_receivers
-            - klass.constantize.all.each do |rec|
+            - klass.constantize.order('name ASC').each do |rec|
               %li.receiver
                 = check_box sending, "receivers_#{key}[]", {}, rec.id
                 %label{:for => "receivers_#{key}_#{rec.id}"}
