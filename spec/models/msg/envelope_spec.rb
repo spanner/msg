@@ -48,11 +48,10 @@ module Msg
       @envelope.from_address.should eq "#{@message.from_name} <#{@message.from_address}>"
     end
 
-    it "should render the message contents" do
+    it "should render the message contents and append a tracker dot" do
       @envelope.send(:render_with_tracker).should eq "#{@message.body}<img src=\"#{@envelope.url_to_open}\" />"
     end
 
-    it "should append a tracker dot to the message"
     it "should send the message" do
       @envelope.send(:send_email)
       @envelope.sent_at.should_not be_nil
