@@ -2,7 +2,7 @@
 
 .message{:id => "message_#{message.id}", :data => {:refreshable => true, :url => message_path(message, :format => :js)} }
   %h2.name
-    = link_to shorten(message.subject, 54), msg.message_url(message), :class => "message"
+    = link_to shorten(message.subject, 54), msg.message_url(message), :class => "message", :data => {:action => "popup", :affected => "#sentbox", :group => "messages"}
     = action_menulink(message)
   = action_menu(message)
   %p.description

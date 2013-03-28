@@ -76,12 +76,12 @@ module Msg
 
 
     def add_receiving_class(klass, options)
+      Rails.logger.warn ">>> Msg.add_receiving_class #{klass}"
+      
       k = klass.to_s
-      unless receiving_classes.include?(k)
-        receiving_classes << k 
-        klass.messaging_groups = options[:groups] || []
-        Msg::Sending.add_receiving_class(klass, options)
-      end
+      receiving_classes << k unless receiving_classes.include?(k)
+      klass.messaging_groups = options[:groups] || []
+      Msg::Sending.add_receiver_hooks(klass, options)
     end
 
   end

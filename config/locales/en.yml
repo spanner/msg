@@ -10,7 +10,7 @@ en:
   bounce_report: "Bounces"
   close: "close"
   create_message: "create a new message"
-  sent_report: "Sent box"
+  sent_report: "Sent messages"
   messages: "Messages"
   please_set_layout: "You probably want to set Msg.layout (in an initializer) so that msg uses your application layout and not this default file."
   confirm_delete_message: "Are you sure you want to delete the message '%{subject}? This cannot be undone."
@@ -46,6 +46,14 @@ en:
   saved_note: "'Saving' the message adds it to the main message list, making it easier to send again. Unsaved messages can still be found in the sent box and resent from there."
   sender: "Sender's name and address"
   send_to: "Send to"
+  sent_to: "Sent to"
+  sent_to_count:
+    zero: "Sent to nobody"
+    one: "Sent to one person"
+    other: "Sent to %{count} people"
+  sent_count: "Sent: %{count}"
+  opened_count: "Opened: %{count}"
+  bounced_count: "Bounced: %{count}"
   transactional_message: "Transactional message"
   transactional_message_note: "You probably don't want to change this."
   date:

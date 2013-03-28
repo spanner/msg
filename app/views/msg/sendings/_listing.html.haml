@@ -1,0 +1,16 @@
+- sending ||= listing
+- receiver_count = sending.envelopes.count
+
+%li.sending
+  %strong
+    = link_to sending.message.subject, msg.sending_url(sending)
+  %br
+  - if sending.receiving_group
+    = t(:sent_to)
+    = t("msg.groups.#{sending.receiving_group}")
+    = t(:receiver_count, :count => sending.envelopes.count)
+    
+  - else
+    = t(:sent_to_count, :count => sending.envelopes.count)
+  = t(:at)
+  = l(sending.created_at, :format => :natural_with_date)

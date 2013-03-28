@@ -19,8 +19,7 @@ module Msg
     
     def render_for(receiver)
       values = receiver.for_email.reverse_merge(Msg.email_values)
-      rendered = Mustache.render(body, values)
-      ActionController::Base.helpers.sanitize(rendered, :tags => Msg.tags_allowed_in_email, :attributes => Msg.attributes_allowed_in_email)
+      Mustache.render(body, values)
     end
 
   end

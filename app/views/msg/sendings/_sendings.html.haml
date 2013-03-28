@@ -1,0 +1,2 @@
+.sending_list{:data => {:refreshable => true, :url => msg.sendings_path(:format => :js)}}
+  = render :partial => "msg/sendings/sending", :collection => @sendings

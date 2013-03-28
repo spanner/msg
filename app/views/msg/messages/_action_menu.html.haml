@@ -2,9 +2,9 @@
   .menu{:data => {:for => "message_#{message.id}"}}
     %ul.actions
       %li
-        = link_to t(:edit_message), msg.edit_message_url(message), :class => 'edit', :data => {:action => "popup", :replaced => "#message_#{message.id}"}
+        = link_to t(:edit_message), msg.edit_message_url(message), :class => 'edit', :data => {:action => "popup", :affected => "#message_#{message.id}, #sentbox", :group => "messages"}
       %li
-        = link_to t(:preview_and_send), msg.message_url(message), :class => "edit", :data => {:action => "popup"}
+        = link_to t(:preview_and_send), msg.message_url(message), :class => "edit", :data => {:action => "popup", :affected => "#sentbox", :group => "messages"}
       - unless message.transactional?
         %li
           = link_to t(:delete_message), msg.message_url(message), :method => 'delete', :class => 'delete', :data => {:action => "remove", :removed => "#message_#{message.id}", :confirm => t(:confirm_delete_message, :subject => message.subject)}

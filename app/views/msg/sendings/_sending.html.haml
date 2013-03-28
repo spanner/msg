@@ -1,9 +1,20 @@
 - sending ||= @sending
 
 .sending{:id => "sending_#{sending.id}", :data => {:refreshable => true, :url => sending_path(sending, :format => :js)} }
-  %h3.subject
-    = sending.message.subject
+  %h2.name
+    = link_to shorten(sending.message.subject, 54), msg.sending_url(sending), :class => "sending"
+
   %p.description
-    = t(:sent_to, :count => sending.envelopes.count)
-    = t(:on)
-    = l(sending.sent_at, :format => :natural)
+    - if sending.receiving_group
+      = t(:sent_to)
+      = t("msg.groups.#{sending.receiving_group}")
+      = t(:receiver_count, :count => sending.envelopes.count)
+    - else
+      = t(:sent)
+    = t(:at)
+    = l(sending.created_at, :format => :natural_with_date)
+
+  %p.responses
+    = t(:sent_count, :count => sending.envelopes.count) + '.'
+    = t(:opened_count, :count => sending.envelopes.opened.count) + '.'
+    = t(:bounced_count, :count => sending.envelopes.bounced.count) + '.'
