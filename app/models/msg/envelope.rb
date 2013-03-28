@@ -11,8 +11,9 @@ module Msg
     after_create :send_email
 
     scope :opened, where("opened_at IS NOT NULL")
+
     scope :bounced, select("msg_envelopes.*")
-                  .joins("LEFT OUTER JOIN msg_bounces as mb ON mb.envelope_id = msg_envelopes.id")
+                  .joins("INNER JOIN msg_bounces as mb ON mb.envelope_id = msg_envelopes.id")
                   .having("count(mb.id) > 0")
 
     def message

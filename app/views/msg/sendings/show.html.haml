@@ -1,17 +1,5 @@
 #sending
-  
-  %h2.subject
-    = shorten(@sending.message.subject, 54)
 
-  %p
-    - if @sending.receiving_group
-      = t(:sent_to)
-      = t("msg.groups.#{@sending.receiving_group}")
-      = t(:receiver_count, :count => @sending.envelopes.count)
-    - else
-      = t(:sent)
-    = t(:at)
-    = l(@sending.created_at, :format => :natural_with_date)
   
   - if envelope = @sending.envelopes.first
     .envelope
@@ -31,6 +19,11 @@
             = t(:from).titlecase + ":"
           %strong
             = envelope.from_address
+        %p
+          %span.field
+            = t(:sent_at).titlecase + ":"
+          %strong
+            = l(@sending.created_at, :format => :natural_with_date)
       %iframe.body{:src => msg.review_sending_url(@sending)}
     
 
@@ -41,10 +34,17 @@
 -content_for :margin do
   #receivers
     %p
-      Peity chart here.
+      - if @sending.receiving_group
+        = t(:sent_to)
+        = t("msg.groups.#{@sending.receiving_group}")
+        = t(:receiver_count, :count => @sending.envelopes.count)
+      - else
+        = t(:sent)
+      = t(:at)
+      = l(@sending.created_at, :format => :natural_with_date)
 
-    %h3
-      = t :receivers
+    %span.pie{:data => {:diameter => 50}}<
+      = @sending.statistics.join(',')
   
     %ul.envelopes
       = render :partial => "msg/envelopes/listing", :collection => @sending.envelopes

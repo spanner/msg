@@ -31,11 +31,11 @@ h2
     +big_icon_link("msg/message.png")
     color: $text
     +hover
-  a.sending
-    margin-left: -32px
-    +big_icon_link("msg/sending.png")
-    color: $text
-    +hover
+  // a.sending
+  //   margin-left: -32px
+  //   +big_icon_link("msg/sending.png")
+  //   color: $text
+  //   +hover
   
 #sending
   position: relative
@@ -73,8 +73,10 @@ ul.envelopes
       color: $mid
     &.read
       color: $green
+      font-weight: bold
     &.bounced
       color: $red
+      font-weight: bold
 
 #preview_message, #send_message
   width: 800px
@@ -188,12 +190,21 @@ ul.envelopes
     div.buttons
       margin-top: 20px
 
-#bouncebox, #receivers
+#bouncebox
   margin-top: 200px
+
+#receivers
+  margin-top: 150px
 
 #sentbox, #bouncebox
   ul
     padding: 0
     list-style: none
     li
-      margin-bottom: 6px
+      margin-bottom: 12px
+    li.sending
+      a
+        display: block
+        font-weight: bold
+        margin-left: -20px
+        

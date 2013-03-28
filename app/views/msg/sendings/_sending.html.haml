@@ -2,7 +2,9 @@
 
 .sending{:id => "sending_#{sending.id}", :data => {:refreshable => true, :url => sending_path(sending, :format => :js)} }
   %h2.name
-    = link_to shorten(sending.message.subject, 54), msg.sending_url(sending), :class => "sending"
+    %span.pie{:data => {:diameter => 20}}<
+      = sending.statistics.join(',')
+    = link_to shorten(sending.message.subject, 54), msg.sending_url(sending)
 
   %p.description
     - if sending.receiving_group

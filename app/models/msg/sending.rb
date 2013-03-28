@@ -12,6 +12,14 @@ module Msg
       end
     end
 
+    def statistics
+      sent = envelopes.count || 0
+      bounced = envelopes.bounced.count || 0
+      read = envelopes.opened.count || 0
+      unread = sent-read-bounced
+      [unread, read, bounced]
+    end
+
     def self.add_receiver_hooks(klass, options)
       key = klass.to_s.underscore
 
