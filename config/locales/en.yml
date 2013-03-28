@@ -9,7 +9,7 @@ en:
   from: "From"
   bounce_report: "Bounces"
   close: "close"
-  create_message: "create a new message"
+  create_message: "send or save a new message"
   sent_report: "Sent messages"
   messages: "Messages"
   please_set_layout: "You probably want to set Msg.layout (in an initializer) so that msg uses your application layout and not this default file."
