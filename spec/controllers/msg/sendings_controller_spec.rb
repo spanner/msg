@@ -31,14 +31,6 @@ module Msg
       end
     end
 
-    #update
-    describe "PUT #update" do
-      it "should not update" do
-        sending = FactoryGirl.create(:sending, :message => @message)
-        post :update, { :message_id => @message.id, :sending_id => sending.id }
-      end
-    end
-
     #show
     describe "GET #show" do
       it "should show a sending report"
