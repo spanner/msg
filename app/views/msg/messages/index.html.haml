@@ -1,9 +1,13 @@
-#main.messages
+#messages
+
+  %p.action
+    = link_to t(:create_message), msg.new_message_url, :class => "add", :data => {:action => "popup", :affected => "#saved_messages"}
 
   %h2.section
     = t :transactional_messages
+
   = render "msg/messages/transactional_messages"
-    
+
   %h2.section
     = t :saved_messages
     %span.action

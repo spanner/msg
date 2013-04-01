@@ -47,7 +47,6 @@ module Msg
       # send it
       Msg::MsgMailer.message_in_envelope(self).deliver
       # note sending time
-      Rails.logger.warn "setting envelope.sent_at to "
       self.sent_at = Time.now
       # and save our changes
       self.save!

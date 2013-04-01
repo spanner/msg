@@ -5,7 +5,7 @@
   %a{:href => msg.sending_url(sending)}
     %span.pie{:data => {:diameter => 16}}<
       = sending.statistics.join(',')
-    = sending.message.subject
+    = shorten(sending.message.subject, 45)
   - if sending.receiving_group
     = t(:sent_to)
     = t("msg.groups.#{sending.receiving_group}")

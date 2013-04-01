@@ -1,27 +1,20 @@
 module Msg
-  class DeviseMailer < ActionMailer::Base
+  class DeviseMailer < Devise::Mailer
     default from: Msg.default_from_address, :bcc => Msg.email_bcc
     layout Msg.email_layout
 
-    # It would be nice to intervene less in Devise but we can't send user-authored content straight
-    # through: it has to be rendered in a limited way way first.
-
-    def devise_mail(record, action, opts={})
-      initialize_from_record(record)
-      mail headers_for(record, action, opts)
+    def confirmation_instructions(receiver, opts={})
+      @message = Msg::Message.find_by_function('confirmation_instructions')
+      @contents = @message.render_for(receiver)
+      super
     end
 
-    def headers_for(record, action, opts)
-      headers = super(action, opts)
-      headers[:body] = body_for(record, action)
-      headers
+    def reset_password_instructions(receiver, opts={})
+      @message = Msg::Message.find_by_function('reset_password_instructions')
+      @contents = @message.render_for(receiver)
+      super
     end
 
-    def body_for(record, action)
-      if template = Msg::Message.find_by_function(action)
-        template.render_for(record)
-      end
-    end
 
   end
 end
