@@ -6,15 +6,16 @@ module Msg
     def confirmation_instructions(receiver, opts={})
       @message = Msg::Message.find_by_function('confirmation_instructions')
       @contents = @message.render_for(receiver)
+      opts[:subject] = @message.subject
       super
     end
 
     def reset_password_instructions(receiver, opts={})
       @message = Msg::Message.find_by_function('reset_password_instructions')
       @contents = @message.render_for(receiver)
+      opts[:subject] = @message.subject
       super
     end
-
 
   end
 end
