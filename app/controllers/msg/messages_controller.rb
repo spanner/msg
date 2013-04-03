@@ -21,7 +21,9 @@ module Msg
     end
 
     def show
-      respond_with @message
+      respond_with @message do |format|
+        format.js { render :partial => "msg/messages/message" }
+      end
     end
 
     def preview
