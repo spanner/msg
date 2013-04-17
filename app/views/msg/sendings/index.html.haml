@@ -6,3 +6,7 @@
 
 -content_for :margin do
   = render :partial => "msg/bounces/report"
+-content_for :css do
+  = stylesheet_link_tag "msg.css"
+-content_for :js do
+  = javascript_include_tag "msg.js"

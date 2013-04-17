@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>app/models/msg/message.rb</string>
+	<string>app/assets/stylesheets/msg.css.sass</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -40,9 +40,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>8</integer>
 				<key>line</key>
-				<integer>3</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -399,6 +399,34 @@
 			<key>firstVisibleLine</key>
 			<integer>11</integer>
 		</dict>
+		<key>lib/msg/version.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>18</integer>
+				<key>line</key>
+				<integer>1</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>msg.gemspec</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>25</integer>
+				<key>line</key>
+				<integer>26</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
@@ -417,6 +445,8 @@
 		<string>app/controllers/msg/sendings_controller.rb</string>
 		<string>app/views/msg/sendings/_report.html.haml</string>
 		<string>app/models/msg/message.rb</string>
+		<string>msg.gemspec</string>
+		<string>lib/msg/version.rb</string>
 		<string>app/views/msg/bounces/index.html.haml</string>
 		<string>app/models/msg/envelope.rb</string>
 		<string>lib/msg/receivers.rb</string>
@@ -425,6 +455,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{774, 91}, {1128, 928}}</string>
+	<string>{{480, 80}, {1128, 928}}</string>
 </dict>
 </plist>

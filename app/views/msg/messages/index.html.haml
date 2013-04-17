@@ -21,3 +21,8 @@
 
 -content_for :title do
   = t :messages
+
+-content_for :css do
+  = stylesheet_link_tag "msg.css"
+-content_for :js do
+  = javascript_include_tag "msg.js"
