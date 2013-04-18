@@ -46,12 +46,8 @@ h2
     margin-left: -32px
     +icon_link("msg/message.png")
     color: $dark
-    +hover
-  // a.sending
-  //   margin-left: -32px
-  //   +big_icon_link("msg/sending.png")
-  //   color: $dark
-  //   +hover
+    &:hover
+      color: $red
 
 h2.section
   font-size: 1.25em
@@ -64,7 +60,7 @@ h2.section
   h2.subject
     margin: 50px 0 30px -32px
     margin-top: 50px
-    +big_icon_link("msg/sending.png")
+    +icon_link("msg/sending.png")
   .envelope
     +box-shadow(1px 3px 8px $dark)
     .headers
