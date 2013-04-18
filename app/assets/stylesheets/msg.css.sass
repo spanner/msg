@@ -5,6 +5,20 @@ $mid: #9a9b9d
 $pale: #bdbdbd
 $palest: #f2f0ed !default
 
+=icon_link($url)
+  display: inline-block
+  text-indent: 30px
+  line-height: 30px
+  min-height: 24px
+  margin-top: 0
+  background:
+    color: transparent
+    position: 0 0
+    repeat: no-repeat
+    image: image-url($url)
+  &:hover
+    background-position: 0 -48px
+
 .message_list
   div.message
     margin-top: 5px
@@ -30,7 +44,7 @@ $palest: #f2f0ed !default
 h2
   a.message
     margin-left: -32px
-    +big_icon_link("msg/message.png")
+    +icon_link("msg/message.png")
     color: $text
     +hover
   // a.sending
