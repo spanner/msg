@@ -1,8 +1,5 @@
 #messages
 
-  %p.action
-    = link_to t(:create_message), msg.new_message_url, :class => "add", :data => {:action => "popup", :affected => "#saved_messages"}
-
   %h2.section
     = t :transactional_messages
 
@@ -14,6 +11,8 @@
       = link_to t(:create_message), msg.new_message_url, :class => "add minimal", :data => {:action => "popup", :affected => "#saved_messages"}
   = render "msg/messages/saved_messages"
 
+  %p.action
+    = link_to t(:create_message), msg.new_message_url, :class => "add", :data => {:action => "popup", :affected => "#saved_messages"}
 
 -content_for :margin do
   = render :partial => "msg/bounces/report"
@@ -21,7 +20,6 @@
 
 -content_for :title do
   = t :messages
-
 -content_for :css do
   = stylesheet_link_tag "msg.css"
 -content_for :js do
