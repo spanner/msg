@@ -48,3 +48,8 @@
   
     %ul.envelopes
       = render :partial => "msg/envelopes/listing", :collection => @sending.envelopes
+
+-content_for :css do
+  = stylesheet_link_tag "msg.css"
+-content_for :js do
+  = javascript_include_tag "msg.js"
