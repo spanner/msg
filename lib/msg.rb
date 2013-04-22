@@ -9,6 +9,7 @@ module Msg
                  :default_from_name,
                  :email_bcc,
                  :email_values,
+                 :email_return_path,
                  :messaging_groups,
                  :receiving_classes,
                  :sanitized_allowed_tags,
