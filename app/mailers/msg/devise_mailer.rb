@@ -1,6 +1,6 @@
 module Msg
   class DeviseMailer < Devise::Mailer
-    default from: Msg.default_from_address, :bcc => Msg.email_bcc, :return_path => Msg.email_return_path
+    default from: Msg.default_from_address, :bcc => Msg.email_bcc, :return_path => Msg.email_return_path, :errors_to => Msg.email_return_path
     layout Msg.email_layout
 
     def confirmation_instructions(receiver, opts={})
