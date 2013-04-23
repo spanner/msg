@@ -2,6 +2,7 @@ require 'spec_helper'
 
 module Msg
   describe SendingsController do
+    render_views
 
     before :each do
       @routes = Msg::Engine.routes
@@ -13,7 +14,7 @@ module Msg
     describe "GET #new" do
       it "should show the send-a-message form" do
         get :new, { :message_id => @message.id }
-        pending # response.body should contain form
+        response.should contain("Send the message")
       end
     end
 

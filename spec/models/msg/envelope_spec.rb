@@ -20,10 +20,6 @@ module Msg
       @envelope.should_not be_valid
     end
 
-    it "should generate a tracker url" do
-      pending "tracker?"
-    end
-
     it "should by default be marked unopened" do
       @envelope.opened_at.should be_nil
     end
@@ -48,14 +44,13 @@ module Msg
       @envelope.from_address.should eq "#{@message.from_name} <#{@message.from_address}>"
     end
 
-    it "should render the message contents and append a tracker dot" do
-      @envelope.send(:render_with_tracker).should eq "#{@message.body}<img src=\"#{@envelope.url_to_open}\" />"
-    end
-
     it "should send the message" do
       @envelope.send(:send_email)
       @envelope.sent_at.should_not be_nil
-      pending "test for send"
+      mail = ActionMailer::Base.deliveries.last
+      mail[:from].to_s.should == @envelope.from_address
+      mail[:subject].to_s.should == @envelope.subject
+      mail[:message_id].to_s.should == @envelope.email_id.to_s
     end
 
   end

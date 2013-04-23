@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326093048) do
+ActiveRecord::Schema.define(:version => 20130423091642) do
 
   create_table "msg_bounces", :force => true do |t|
     t.integer  "envelope_id"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(:version => 20130326093048) do
     t.text     "raw_message"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "email"
+    t.string   "status"
+    t.string   "diagnostic"
   end
 
   add_index "msg_bounces", ["envelope_id"], :name => "index_msg_bounces_on_envelope_id"
@@ -63,8 +66,10 @@ ActiveRecord::Schema.define(:version => 20130326093048) do
     t.integer  "message_id"
     t.integer  "created_by_id"
     t.datetime "sent_at"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "receiving_class"
+    t.string   "receiving_group"
   end
 
   add_index "msg_sendings", ["created_by_id"], :name => "index_msg_sendings_on_created_by_id"

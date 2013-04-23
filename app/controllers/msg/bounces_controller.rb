@@ -1,56 +1,36 @@
 require 'open-uri'
 
 module Msg
-  class BouncesController < Msg::EngineController
+  class BouncesController < ::ApplicationController
     respond_to :json
+    
+    before_filter :read_json_body
 
-    # this is pinged from Amazon SNS with a JSON body something like this:
-    #
-    # {
-    #     "notificationType":"Bounce",
-    #     "bounce":{
-    #        "bounceType":"Permanent",
-    #        "reportingMTA":"dns; email.example.com",
-    #        "bouncedRecipients":[
-    #           {
-    #              "emailAddress":"username@example.com",
-    #              "status":"5.1.1",
-    #              "action":"failed",
-    #              "diagnosticCode":"smtp; 550 5.1.1 <username@example.com>... User"
-    #           }
-    #        ],
-    #        "bounceSubType":"General",
-    #        "timestamp":"2012-06-19T01:07:52.000Z",
-    #        "feedbackId":"00000138111222aa-33322211-cccc-cccc-cccc-ddddaaaa068a-000000"
-    #     },
-    #     "mail":{
-    #        "timestamp":"2012-06-19T01:05:45.000Z",
-    #        "source":"sender@example.com",
-    #        "messageId":"00000138111222aa-33322211-cccc-cccc-cccc-ddddaaaa0680-000000",
-    #        "destination":[
-    #           "username@example.com"
-    #        ]
-    #     }
-    #  }
-    #
-    #
     # When the subscription is first set up they will also POST us a SubscriptionConfirmation,
-    # upon which we have to GET the given url to confirm that we can follow orders.
+    # upon which we have to GET the given url to confirm that we are able to follow orders.
     #
     def create
-      if request.headers['x-amz-sns-message-type'] == 'SubscriptionConfirmation'
-        response = HTTParty.get(params['SubscribeURL'])
+      data = ActiveSupport::JSON.decode(request.body)
+      
+      if request.env['x-amz-sns-message-type'] == 'SubscriptionConfirmation'
+        response = HTTParty.get(data['SubscribeURL'])
         head :ok
 
       else
-        mail = params['Message']['mail']
-        bounce = params['Message']['bounce']
-        if envelope = Msg::Envelope.find_by_email_id(mail['messageId'])
-          envelope.bounces.create({
-            :bounce_type => bounce['bounceType'],
-            :bounce_subtype => bounce['bounceSubType'],
-            :reporter => bounce['reportingMTA'],
-            :raw_message => JSON.dump(bounce)
+        mail_data = data['mail']
+        bounce_data = data['bounce']
+        recipients = [bounce_data['bouncedRecipients']].flatten
+        envelope = Msg::Envelope.find_by_email_id(mail_data['messageId'])
+        recipients.each do |recipient_data|
+          Msg::Bounce.create({
+            :envelope => envelope,
+            :bounce_type => bounce_data['bounceType'],
+            :bounce_subtype => bounce_data['bounceSubType'],
+            :reporter => bounce_data['reportingMTA'],
+            :email => recipient_data['emailAddress'],
+            :status => recipient_data['status'],
+            :diagnostic => recipient_data['diagnosticCode'],
+            :raw_message => JSON.dump(bounce_data)
           })
         end
         head :ok
@@ -58,10 +38,13 @@ module Msg
     end
 
   protected
-
-    def build_bounce
-      @bounce = Msg::Bounce.new(params[:bounce])
+    
+    # Amazon sends its SNS notifications as json data with a text/plain content-type, which 
+    # rails really hates. Here we read the json body if it hasn't already been read.
+    #
+    def read_json_body
+    
     end
-
+  
   end
 end

@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'aws-ses'
   
   # Confirming SNS subscriptions
-  s.add_runtime_dependency 'httpclient'
+  s.add_runtime_dependency 'httparty'
 
   # Testing
   s.add_development_dependency "sqlite3"

@@ -12,6 +12,9 @@ Spork.prefork do
   require 'factory_girl_rails'
   require 'database_cleaner'
   require 'email_spec'
+  require 'fakeweb'
+  require 'fakeweb_matcher'
+
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -47,6 +50,8 @@ Spork.prefork do
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction
       DatabaseCleaner.clean_with(:truncation)
+      FakeWeb.allow_net_connect = false 
+      FakeWeb.register_uri(:get, %r|https://amazonses\.com/\?|, :body => "What ho!")
     end
     config.before(:each) do
       DatabaseCleaner.start

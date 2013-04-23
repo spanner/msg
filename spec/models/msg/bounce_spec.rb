@@ -9,9 +9,9 @@ module Msg
       @bounce = FactoryGirl.create(:valid_bounce)
     end
 
-    it "should require an envelope" do
+    it "should require an email address" do
       @bounce.should be_valid
-      @bounce.envelope = nil
+      @bounce.email = nil
       @bounce.should_not be_valid
     end
 

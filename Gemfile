@@ -6,6 +6,7 @@ source "http://rubygems.org"
 
 gemspec
 gem "jquery-rails"
+gem "httparty"
 
 group :assets do
   gem 'sass-rails'
@@ -29,5 +30,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'awesome_print'
   gem 'email_spec'
+  gem 'fakeweb'
+  gem 'fakeweb-matcher'
 end
 
