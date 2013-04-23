@@ -8,9 +8,7 @@ module Msg
     # upon which we have to GET the given url to confirm that we are able to follow orders.
     #
     def create
-      Rails.logger.warn "!!! requeset.env: #{request.env.inspect}"
-      
-      if request.env['x-amz-sns-message-type'] == 'SubscriptionConfirmation'
+      if request.env['x-amz-sns-message-type'] == 'SubscriptionConfirmation' || ENV['HTTP_X_AMZ_SNS_MESSAGE_TYPE'] == "SubscriptionConfirmation" || @data['Type'] == "SubscriptionConfirmation"
         response = HTTParty.get(@data['SubscribeURL'])
         head :ok
 
@@ -42,7 +40,6 @@ module Msg
     #
     def read_json_body
       @data = ActiveSupport::JSON.decode(request.body)
-      Rails.logger.warn "!!! bounce notification body: #{@data.inspect}"
     end
   
   end
