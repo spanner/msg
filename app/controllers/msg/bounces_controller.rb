@@ -8,7 +8,7 @@ module Msg
     # upon which we have to GET the given url to confirm that we are able to follow orders.
     #
     def create
-      Rails.logger.warn "!!! requeset.env: #{requeset.env.inspect}"
+      Rails.logger.warn "!!! requeset.env: #{request.env.inspect}"
       
       if request.env['x-amz-sns-message-type'] == 'SubscriptionConfirmation'
         response = HTTParty.get(@data['SubscribeURL'])
