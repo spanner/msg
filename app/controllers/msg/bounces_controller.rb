@@ -13,9 +13,11 @@ module Msg
         head :ok
 
       else
+        Rails.logger.warn ">--< bounce body: #{@data.inspect}"
+        
         mail_data = @data['mail']
         bounce_data = @data['bounce']
-        recipients = [bounce_data['bouncedRecipients']].flatten
+        recipients = bounce_data['bouncedRecipients']
         envelope = Msg::Envelope.find_by_email_id(mail_data['messageId'])
         recipients.each do |recipient_data|
           Msg::Bounce.create({
@@ -36,10 +38,14 @@ module Msg
   protected
     
     # Amazon sends its SNS notifications as json data with a text/plain content-type, which 
-    # rails really doesn't get on. Here, with any luck, we go back and retrieve the json body from the request.
+    # rails really doesn't like. Here, with any luck, we go back and retrieve the json body from the request.
     #
     def read_json_body
-      @data = ActiveSupport::JSON.decode(request.body)
+      if params['mail'] || params['Type']
+        @data = params
+      else
+        @data = ActiveSupport::JSON.decode(request.body)
+      end
     end
   
   end
