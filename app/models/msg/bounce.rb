@@ -16,5 +16,11 @@ module Msg
       bounce_type == 'Transient'
     end
     
+    # This is so far just a quick and slightly dirty console call to turn an email message into a bounce record.
+    # With a bit more header-processing we should be able to record type and subtype.
+    def self.from(email, message="")
+      create(:email => email, :raw_message => message)
+    end
+    
   end
 end

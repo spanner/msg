@@ -12,8 +12,8 @@ module Msg
                  :email_return_path,
                  :messaging_groups,
                  :receiving_classes,
-                 :sanitized_allowed_tags,
-                 :sanitized_allowed_attributes,
+                 :tags_allowed_in_email,
+                 :attributes_allowed_in_email,
                  :sending_domain,
                  :ses_access_key_id,
                  :ses_secret_access_key
@@ -61,7 +61,7 @@ module Msg
     end
 
     def tags_allowed_in_email
-      @@permitted_tags ||= ActionView::Base.sanitized_allowed_tags
+      @@permitted_tags ||= ActionView::Base.sanitized_allowed_tags.to_a
     end
 
     def attributes_allowed_in_email

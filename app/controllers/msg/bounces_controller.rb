@@ -35,8 +35,8 @@ module Msg
 
   protected
     
-    # Amazon sends its SNS notifications as json data with a text/plain content-type, which 
-    # rails really doesn't get on. Here, with any luck, we go back and retrieve the json body from the request.
+    # Amazon sends its SNS notifications as json data with a text/plain content-type, which rails really
+    #  doesn't get on with. Here, with any luck, we go back and retrieve the json body from the request.
     #
     def read_json_body
       @data = ActiveSupport::JSON.decode(request.body)
