@@ -39,7 +39,11 @@ module Msg
     #  doesn't get on with. Here, with any luck, we go back and retrieve the json body from the request.
     #
     def read_json_body
-      @data = ActiveSupport::JSON.decode(request.body)
+      if params['mail'] || params['Type']
+        @data = params
+      else
+        @data = ActiveSupport::JSON.decode(request.body)
+      end
     end
   
   end
