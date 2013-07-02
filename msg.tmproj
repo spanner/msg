@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>app/assets/javascripts/msg.js.coffee</string>
+	<string>lib/msg/engine.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -54,14 +54,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>8</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>208</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>161</integer>
+			<integer>0</integer>
 		</dict>
 		<key>app/controllers/msg/bounces_controller.rb</key>
 		<dict>
@@ -435,7 +435,21 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>13</integer>
+			<integer>0</integer>
+		</dict>
+		<key>lib/msg/engine.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>5</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 		<key>lib/msg/receivers.rb</key>
 		<dict>
@@ -449,21 +463,37 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>11</integer>
+			<integer>0</integer>
 		</dict>
 		<key>lib/msg/version.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>18</integer>
+				<integer>17</integer>
 				<key>line</key>
 				<integer>1</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>18</integer>
+				<key>line</key>
+				<integer>1</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>17</integer>
+				<key>line</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 		<key>spec/factories/msg/bounces.rb</key>
 		<dict>
@@ -614,6 +644,8 @@
 		<string>app/controllers/msg/sendings_controller.rb</string>
 		<string>app/views/msg/sendings/_form.html.haml</string>
 		<string>lib/msg.rb</string>
+		<string>lib/msg/receivers.rb</string>
+		<string>lib/msg/engine.rb</string>
 		<string>app/controllers/msg/messages_controller.rb</string>
 		<string>app/views/msg/messages/_form.html.haml</string>
 		<string>app/assets/javascripts/msg.js.coffee</string>
@@ -626,6 +658,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{730, 32}, {1128, 1109}}</string>
+	<string>{{410, 108}, {1128, 1109}}</string>
 </dict>
 </plist>
