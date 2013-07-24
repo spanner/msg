@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/msg/engine.rb</string>
+	<string>spec/lib/msg_spec.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -444,7 +444,7 @@
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>5</integer>
+				<integer>17</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -464,36 +464,6 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-		</dict>
-		<key>lib/msg/version.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>17</integer>
-				<key>line</key>
-				<integer>1</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>18</integer>
-				<key>line</key>
-				<integer>1</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>17</integer>
-				<key>line</key>
-				<integer>1</integer>
-			</dict>
 		</dict>
 		<key>spec/factories/msg/bounces.rb</key>
 		<dict>
@@ -639,7 +609,6 @@
 		<string>spec/models/msg/envelope_spec.rb</string>
 		<string>spec/models/msg/message_spec.rb</string>
 		<string>spec/lib/msg_spec.rb</string>
-		<string>lib/msg/version.rb</string>
 		<string>app/models/msg/bounce.rb</string>
 		<string>app/controllers/msg/sendings_controller.rb</string>
 		<string>app/views/msg/sendings/_form.html.haml</string>
@@ -658,6 +627,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{410, 108}, {1128, 1109}}</string>
+	<string>{{540, 97}, {1128, 1109}}</string>
 </dict>
 </plist>
