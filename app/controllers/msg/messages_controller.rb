@@ -35,7 +35,7 @@ module Msg
     end
 
     def create
-      @message.update_attributes(params[:message])
+      @message.update_attributes(message_params)
       respond_with @message
     end
 
@@ -44,7 +44,7 @@ module Msg
     end
 
     def update
-      @message.update_attributes(params[:message])
+      @message.update_attributes(message_params)
       respond_with @message
     end
 
@@ -56,7 +56,7 @@ module Msg
   protected
 
     def build_message
-      @message = Msg::Message.new(params[:message])
+      @message = Msg::Message.new
     end
 
     def get_message
@@ -65,6 +65,10 @@ module Msg
 
     def get_transactional_messages
       @transactional_messages = Msg::Message.transactional
+    end
+    
+    def message_params
+      params.require(:message).permit(:subject, :body, :function, :description, :transactional, :saved, :from_name, :from_address)
     end
 
     def get_saved_messages

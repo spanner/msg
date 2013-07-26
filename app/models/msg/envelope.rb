@@ -1,7 +1,5 @@
 module Msg
   class Envelope < ActiveRecord::Base
-    attr_accessible :receiver, :sending
-    
     belongs_to :sending
     belongs_to :receiver, :polymorphic => true
     has_many :bounces

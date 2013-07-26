@@ -2,8 +2,6 @@ require 'mustache'
 
 module Msg
   class Message < ActiveRecord::Base
-    attr_accessible :subject, :body, :function, :description, :transactional, :saved, :from_name, :from_address
-
     has_many :sendings
     belongs_to :created_by, :class_name => Msg.user_class
 

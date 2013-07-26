@@ -1,7 +1,5 @@
 module Msg
   class Sending < ActiveRecord::Base
-    attr_accessible :message_id, :envelopes_attributes
-
     belongs_to :message
     belongs_to :created_by, :class_name => Msg.user_class
     has_many :envelopes, :dependent => :destroy
@@ -35,12 +33,10 @@ module Msg
         self.receiving_group = name
         self.receivers = klass.messaging_groups[name.to_sym].call unless name == 'selected'
       end
-      attr_accessible :"#{key}_group"
       
       define_method  :"#{key}_receiver_ids" do
         self.envelopes.map(&:receiver_id) if self.receiving_class == key
       end
-      attr_accessible :"#{key}_receiver_ids"
 
       # class_receiver_ids= is called from the SendingsController and given a list of receiver ids of this class.
       # they are instantiated and passed to receivers=

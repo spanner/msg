@@ -26,7 +26,7 @@ module Msg
     end
 
     def create
-      @sending.update_attributes(params[:sending])
+      @sending.update_attributes(sending_params)
       respond_with @sending
     end
 
@@ -54,5 +54,10 @@ module Msg
       @page = params[:page] || 1
       @sendings = Msg::Sending.order("created_at DESC").page(@page).per(@show)
     end
+    
+    def sending_params
+      params.require(:sending).permit(:message_id, :envelopes_attributes)
+    end
+    
   end
 end

@@ -1,6 +1,5 @@
 module Msg
   class Bounce < ActiveRecord::Base
-    attr_accessible :email, :envelope, :bounce_type, :bounce_subtype, :raw_message, :reporter, :diagnostic, :status
     belongs_to :envelope
 
     validates :email, :presence => true
