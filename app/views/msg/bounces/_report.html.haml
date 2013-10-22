@@ -1,8 +1,8 @@
 - bounces ||= @bounces || Msg::Bounce.order('created_at DESC').limit(5)
 
-#bouncebox{:data => {:refreshable => true, :url => msg.bounces_path(:format => :js)}}
+%section#bouncebox{:data => {:refreshable => true, :url => msg.bounces_path(:format => :js)}}
   - if bounces.any?
-    %h3
+    %h2.section
       = link_to t(:bounce_report), msg.bounces_url
   
     %ul.bounces

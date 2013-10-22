@@ -20,16 +20,11 @@ module Msg
     # but you can also override the messaging_groups methods if that's easier.
     #
     def messaging_groups
-      Thread.current["messaging_groups_#{self.to_s.underscore}"]  ||= []
-      # @messaging_groups ||= []
+      Thread.current["messaging_groups_#{self.to_s.underscore}"] ||= []
     end
     
-    # Messaging groups are always held as a hash of name => lambda { retrieval action }, and in a complex
-    # case they can be passed in that form. If all the groups correspond to scopes on the receiving class,
-    # you can alternatively supply a list of scope names. It will be expanded to simple lambdas here.
-    #
-    #   receives_messages :groups => [:scope_name, :other_scope_name]
-    #
+    # Messaging groups can be passed in as procs or method names. Usually it's just a list of scopes,
+    # which you can supply as a simple array of names.
     
     def messaging_groups=(groups)
       if groups.is_a?(Array)

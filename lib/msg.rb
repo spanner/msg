@@ -77,8 +77,6 @@ module Msg
 
 
     def add_receiving_class(klass, options)
-      Rails.logger.warn ">>> Msg.add_receiving_class #{klass}"
-      
       k = klass.to_s
       receiving_classes << k unless receiving_classes.include?(k)
       klass.messaging_groups = options[:groups] || []

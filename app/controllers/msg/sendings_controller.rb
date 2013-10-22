@@ -56,7 +56,9 @@ module Msg
     end
     
     def sending_params
-      params.require(:sending).permit(:message_id, :envelopes_attributes)
+      parameter_names = [:message_id, :envelopes_attributes] + Msg.receiving_classes.map{|klass| "#{klass.underscore}_group"}
+      Rails.logger.warn "permitted parameter_names: #{parameter_names.inspect}"
+      params.require(:sending).permit(*parameter_names)
     end
     
   end
