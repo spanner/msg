@@ -1,4 +1,4 @@
-- if editable?(message)
+- if can? :edit, message
   .menu{:data => {:for => "message_#{message.id}"}}
     %ul.actions
       %li

@@ -4,9 +4,6 @@ module Msg
 
     initializer "msg.integration" do |app|
       ActiveRecord::Base.send :include, Msg::Receivers
-      ActiveSupport.on_load :action_controller do
-        helper Msg::MsgHelper
-      end
     end
 
     config.generators do |g|
