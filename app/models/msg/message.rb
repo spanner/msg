@@ -14,9 +14,9 @@ module Msg
       address = from_address? ? from_address : Msg.default_from_address
       "#{name} <#{address}>"
     end
-    
-    def render_for(receiver)
-      values = receiver.for_email.reverse_merge(Msg.email_values)
+
+    def render_for(receiver, token=nil)
+      values = receiver.for_email(token).reverse_merge(Msg.email_values)
       Mustache.render(body, values)
     end
 

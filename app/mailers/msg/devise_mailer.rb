@@ -3,16 +3,17 @@ module Msg
     default from: Msg.default_from_address, :bcc => Msg.email_bcc, :return_path => Msg.email_return_path, :errors_to => Msg.email_return_path
     layout Msg.email_layout
 
-    def confirmation_instructions(receiver, opts={})
+    def confirmation_instructions(receiver, token, opts={})
       @message = Msg::Message.find_by_function('confirmation_instructions')
-      @contents = @message.render_for(receiver)
+      @token = token
+      @contents = @message.render_for(receiver, token)
       opts[:subject] = @message.subject
       super
     end
 
-    def reset_password_instructions(receiver, opts={})
+    def reset_password_instructions(receiver, token, opts={})
       @message = Msg::Message.find_by_function('reset_password_instructions')
-      @contents = @message.render_for(receiver)
+      @contents = @message.render_for(receiver, token)
       opts[:subject] = @message.subject
       super
     end
