@@ -21,7 +21,6 @@ module Msg
   class MsgError < StandardError; end
   class EmailInvalid < MsgError; end
 
-
   class << self
 
     def add_receiving_class(klass, options)

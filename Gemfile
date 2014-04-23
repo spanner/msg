@@ -19,8 +19,6 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'aws-ses'
-  gem 'devise' # only for testing MsgDeviseMailer
-  gem 'devise-encryptable'
   gem 'haml'
   gem 'capybara'
   gem 'rspec-rails'

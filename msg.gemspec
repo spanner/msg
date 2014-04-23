@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["will@spanner.org"]
   s.homepage    = "https://github.com/spanner/msg"
   s.summary     = "Makes your email more flavoursome."
-  s.description = "Msg is a general-purpose messaging engine for rails apps. Use it to compose, revise, send and resend messages to selected or generated groups of user-like objects. It uses a simple mustache-based template system and brings your devise email templates into the database so that they too are editable and resendable."
+  s.description = "Msg is a general-purpose messaging engine for rails apps. Use it to compose, revise, send and resend messages to selected or generated groups of user-like objects. It uses a simple mustache-based template system."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]

@@ -59,13 +59,6 @@ Spork.prefork do
     config.after(:each) do
       DatabaseCleaner.clean
     end
-
-  end
-
-  ## controller methods
-  # devise sign_in
-  def sign_in_admin
-    sign_in FactoryGirl.create(:admin)
   end
 
 end

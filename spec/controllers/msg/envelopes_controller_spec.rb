@@ -1,5 +1,4 @@
 require 'spec_helper'
-include Devise::TestHelpers
 module Msg
   describe EnvelopesController do
 
