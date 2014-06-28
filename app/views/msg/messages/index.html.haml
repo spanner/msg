@@ -9,10 +9,12 @@
     = t :saved_messages
     %span.action
       = link_to t(:create_message), msg.new_message_url, :class => "add minimal", :data => {:action => "popup", :affected => "#saved_messages"}
-  = render "msg/messages/saved_messages"
 
-  %p.action
-    = link_to t(:create_message), msg.new_message_url, :class => "add", :data => {:action => "popup", :affected => "#saved_messages"}
+  = render "msg/messages/saved_messages"
+  
+  - if can? :create, Msg::Message
+    %p.action
+      = link_to t(:create_message), msg.new_message_url, :class => "add", :data => {:action => "popup", :affected => "#saved_messages"}
 
 -content_for :margin do
   = render :partial => "msg/bounces/report"

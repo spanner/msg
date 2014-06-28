@@ -31,7 +31,7 @@ module Msg
       define_method  :"#{key}_group=" do |name|
         self.receiving_class = key
         self.receiving_group = name
-        self.receivers = klass.messaging_groups[name.to_sym].call unless name == 'selected'
+        self.receivers = klass.messaging_groups[name.to_sym].call
       end
       
       define_method  :"#{key}_receiver_ids" do

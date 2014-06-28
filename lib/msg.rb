@@ -24,6 +24,13 @@ module Msg
 
   class << self
 
+    def add_receiving_class(klass, options)
+      k = klass.to_s
+      receiving_classes << k unless receiving_classes.include?(k)
+      klass.messaging_groups = options[:groups] || []
+      Msg::Sending.add_receiver_hooks(klass, options)
+    end
+
     def setup
       yield self
     end
@@ -70,19 +77,6 @@ module Msg
 
     def sending_domain
       @@sending_domain ||= ActionMailer::Base.default_url_options[:host]
-    end
-
-
-
-
-
-    def add_receiving_class(klass, options)
-      Rails.logger.warn ">>> Msg.add_receiving_class #{klass}"
-      
-      k = klass.to_s
-      receiving_classes << k unless receiving_classes.include?(k)
-      klass.messaging_groups = options[:groups] || []
-      Msg::Sending.add_receiver_hooks(klass, options)
     end
 
   end
