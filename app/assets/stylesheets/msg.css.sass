@@ -43,7 +43,9 @@ $palest: #f2f0ed !default
     p.responses
       margin: 0
 
-h2
+h3.message
+  font-weight: normal
+  font-size: 1.5em
   a.message
     margin-left: -32px
     +icon_link("msg/message.png")
@@ -220,6 +222,8 @@ ul.envelopes
     li.sending
       a
         display: block
-        font-weight: bold
+        color: $dark
+        font-weight: normal
         margin-left: -20px
-
+        &:hover
+          color: $red

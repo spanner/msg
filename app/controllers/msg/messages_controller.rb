@@ -84,6 +84,9 @@ module Msg
       else
         @receiver = klass.classify.constantize.first
       end
+      
+      Rails.logger.warn ">>> preview receiver will be #{@receiver.inspect}"
+      
       raise ActiveRecord::RecordNotFound, "Cannot find a valid receiver for whom to preview message." unless @receiver
     end
 
