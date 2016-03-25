@@ -15,22 +15,14 @@ module Msg
                  :tags_allowed_in_email,
                  :attributes_allowed_in_email,
                  :sending_domain,
-                 :ses_access_key_id,
-                 :ses_secret_access_key
+                 :mandrill_api_key
 
   class MsgError < StandardError; end
   class EmailInvalid < MsgError; end
 
   class << self
 
-    def add_receiving_class(klass, options)
-      k = klass.to_s
-      receiving_classes << k unless receiving_classes.include?(k)
-      klass.messaging_groups = options[:groups] || []
-      Msg::Sending.add_receiver_hooks(klass, options)
-    end
-
-    def setup
+    def config
       yield self
     end
 

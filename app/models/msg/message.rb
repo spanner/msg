@@ -2,12 +2,9 @@ require 'mustache'
 
 module Msg
   class Message < ActiveRecord::Base
-    has_many :sendings
-    belongs_to :created_by, :class_name => Msg.user_class
-
-    scope :transactional, where(:transactional => true)
-    scope :saved, where(:saved => true, :transactional => false)
-    scope :unsaved, where(:saved => false)
+    has_many :attachments
+    has_many :envelopes
+    has_many :message_recipients
 
     def from
       name = from_name? ? from_name : Msg.default_from_name
@@ -15,9 +12,14 @@ module Msg
       "#{name} <#{address}>"
     end
 
-    def render_for(receiver, token=nil)
-      values = receiver.for_email(token).reverse_merge(Msg.email_values)
-      Mustache.render(body, values)
+    def render_body_for(recipient)
+      interpolations = recipient.for_email.reverse_merge(Msg.email_values)
+      Mustache.render(body, interpolations)
+    end
+
+    def render_subject_for(recipient)
+      interpolations = recipient.for_email.reverse_merge(Msg.email_values)
+      Mustache.render(subject, interpolations)
     end
 
   end

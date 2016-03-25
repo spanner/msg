@@ -1,54 +1,51 @@
 class MsgData < ActiveRecord::Migration
+
   def change
     create_table :msg_messages do |t|
       t.string :subject
+      t.text :message
       t.string :from_address
       t.string :from_name
-      t.text :body
-      t.string :function
-      t.text :description
-      t.boolean :transactional, :default => false
-      t.boolean :saved, :default => false
-      t.integer :created_by_id
+      t.text :bcc
+      t.datetime :sent_at
+      t.integer :opened_by_count
+      t.integer :clicked_by_count
       t.timestamps
     end
 
-    create_table :msg_sendings do |t|
-      t.integer :message_id
-      t.integer :created_by_id
-      t.datetime :sent_at
-      t.timestamps
-    end
-    add_index :msg_sendings, :message_id
-    add_index :msg_sendings, :created_by_id
-    
     create_table :msg_envelopes do |t|
-      t.integer :sending_id
-      t.integer :receiver_id
-      t.integer :email_id
-      t.string :receiver_type
-      t.string :to_address
-      t.string :from_address
-      t.string :subject
-      t.text :contents
+      t.integer :message_id
+      t.string :recipient_type
+      t.integer :recipient_id
+      t.string :mandrill_id
+      t.string :email
       t.datetime :sent_at
-      t.datetime :opened_at
+      t.text :rendered_message
+      t.text :rendered_subject
+      t.text :rejection_message
+      t.boolean :bounced, default: false
+      t.boolean :read, default: false
+      t.boolean :clicked, default: false
       t.timestamps
     end
-    add_index :msg_envelopes, :sending_id
-    add_index :msg_envelopes, :email_id
-    add_index :msg_envelopes, :receiver_id
-    add_index :msg_envelopes, [:receiver_id, :receiver_type]
-    
-    create_table :msg_bounces do |t|
-      t.integer :envelope_id
-      t.string :bounce_type
-      t.string :bounce_subtype
-      t.string :reporter
-      t.text :raw_message
+    create_index :msg_envelopes, :message_id
+    create_index :msg_envelopes, [:recipient_type, :recipient_id]
+    create_index :msg_envelopes, :mandrill_id
+    create_index :msg_envelopes, :bounced
+
+    create_table :msg_attachments do |t|
+      t.integer :message_id
+      t.string :file_content_type
+      t.string :file_name
+      t.text :file_content, limit: 16.megabytes - 1
       t.timestamps
     end
-    add_index :msg_bounces, :envelope_id
-    
+    create_index :msg_attachments, :message_id
+
+    create_table :msg_templates do |t|
+      t.string :subject
+      t.text :message
+      t.timestamps
+    end
   end
 end

@@ -1,53 +1,38 @@
+# Envelope is the sending of a message to one of its recipients,
+# combining a snapshot of the message and recipient at that time
+# with associated delivery and response data gathered from mandrill.
+
 module Msg
   class Envelope < ActiveRecord::Base
-    belongs_to :sending
-    belongs_to :receiver, :polymorphic => true
-    has_many :bounces
+    belongs_to :message
+    belongs_to :recipient, polymorphic: true
 
-    validates :receiver, :presence => true
-    validates :sending, :presence => true
-    after_create :send_email
+    scope :bounced, -> {where(bounced: true)}
+    scope :read, -> {where(read: true)}
+    scope :clicked, -> {where(clicked: true)}
 
-    scope :opened, where("opened_at IS NOT NULL")
-
-    scope :bounced, select("msg_envelopes.*")
-                  .joins("INNER JOIN msg_bounces as mb ON mb.envelope_id = msg_envelopes.id")
-                  .having("count(mb.id) > 0")
-
-    def message
-      sending.message
+    def send!
+      Msg::MandrillSendingJob.perform_later(self)
     end
 
-    def open!
-      update_column(:opened_at, Time.now)
+    def render_message_for_recipient
+      self.rendered_subject = message.render_subject_for_recipient(recipient)
+      self.rendered_message = message.render_body_for_recipient(recipient)
+      self.email = recipient.email
+      self.save
     end
     
-    def status
-      if opened_at?
-        "read"
-      elsif bounces.any?
-        "bounced"
-      else
-        "unread"
-      end
-    end
-
-  protected
-
-    def send_email
-      # Record sending parameters for later reference. The message or receiver properties might change after this is sent.
-      self.email_id = "#{self.id}@#{Msg.sending_domain}"
-      self.subject = message.subject
-      self.from_address = message.from
-      self.to_address = receiver.email
-      # render the message for our receiver
-      self.contents = message.render_for(receiver)
-      # send it
-      Msg::MsgMailer.message_in_envelope(self).deliver
-      # note sending time
-      self.sent_at = Time.now
-      # and save our changes
-      self.save!
+    def for_mandrill
+      render_message_for_recipient
+      {
+        to: [{
+          name: recipient.name,
+          email: recipient.email
+        }],
+        subject: rendered_subject,
+        html: rendered_message,
+        attachments: message.attachments.map(&:for_mandrill)
+      }
     end
 
   end
